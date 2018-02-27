@@ -6,6 +6,8 @@ target 'CTNetworking' do
   # use_frameworks!
  
   pod "AFNetworking"
+  pod "HandyFrame"
+  pod "CTMediator"
 
 
 end
