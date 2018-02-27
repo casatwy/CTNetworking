@@ -18,3 +18,4 @@ todo
 - body param and url param mixed demo
 - websocket call api demo
 - h5 call api demo
+- swift call api demo
