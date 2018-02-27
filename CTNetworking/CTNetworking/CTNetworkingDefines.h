@@ -48,10 +48,17 @@ typedef NS_OPTIONS(NSUInteger, CTAPIManagerCachePolicy) {
     CTAPIManagerCachePolicyDisk = 1 << 1,
 };
 
+extern NSString * _Nonnull const kCTAPIBaseManagerRequestID;
+
+// notification name
 extern NSString * _Nonnull const kCTUserTokenInvalidNotification;
 extern NSString * _Nonnull const kCTUserTokenIllegalNotification;
 extern NSString * _Nonnull const kCTUserTokenNotificationUserInfoKeyManagerToContinue;
-extern NSString * _Nonnull const kCTAPIBaseManagerRequestID;
+
+// result
+extern NSString * _Nonnull const kCTApiProxyValidateResultKeyResponseJSONObject;
+extern NSString * _Nonnull const kCTApiProxyValidateResultKeyResponseJSONString;
+extern NSString * _Nonnull const kCTApiProxyValidateResultKeyResponseData;
 
 @protocol CTAPIManagerInterceptor <NSObject>
 

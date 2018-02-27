@@ -10,17 +10,17 @@
 
 @implementation Target_CTAppContext
 
-- (BOOL)Action_isReachable
+- (BOOL)Action_isReachable:(NSDictionary *)params
 {
     return YES;
 }
 
-- (BOOL)Action_shouldPrintNetworkingLog
+- (BOOL)Action_shouldPrintNetworkingLog:(NSDictionary *)params
 {
     return YES;
 }
 
-- (NSInteger)Action_cacheResponseCountLimit
+- (NSInteger)Action_cacheResponseCountLimit:(NSDictionary *)params
 {
     return 2;
 }

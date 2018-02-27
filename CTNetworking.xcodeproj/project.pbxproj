@@ -24,6 +24,7 @@
 		4A1E17C02045585A00BDBF7B /* CTMemoryCachedRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1E17B02045585A00BDBF7B /* CTMemoryCachedRecord.m */; };
 		4A1E17C12045585A00BDBF7B /* CTDiskCacheCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1E17B42045585A00BDBF7B /* CTDiskCacheCenter.m */; };
 		4A1E17CB2045588E00BDBF7B /* CTServiceFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1E17C92045588E00BDBF7B /* CTServiceFactory.m */; };
+		4A4A07BF2045BDF7001A54C6 /* DemoAPIManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A07BE2045BDF7001A54C6 /* DemoAPIManagerViewController.m */; };
 		4AB2FB0A204586E400770EF1 /* Target_CTAppContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB2FB09204586E400770EF1 /* Target_CTAppContext.m */; };
 		4AB2FB0D204586F900770EF1 /* Target_DemoService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB2FB0C204586F900770EF1 /* Target_DemoService.m */; };
 		4AB2FB102045872200770EF1 /* DemoAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB2FB0F2045872200770EF1 /* DemoAPIManager.m */; };
@@ -76,6 +77,8 @@
 		4A1E17C82045588E00BDBF7B /* CTServiceFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTServiceFactory.h; sourceTree = "<group>"; };
 		4A1E17C92045588E00BDBF7B /* CTServiceFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTServiceFactory.m; sourceTree = "<group>"; };
 		4A1E17CC20455B4200BDBF7B /* CTNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTNetworking.h; sourceTree = "<group>"; };
+		4A4A07BD2045BDF7001A54C6 /* DemoAPIManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoAPIManagerViewController.h; sourceTree = "<group>"; };
+		4A4A07BE2045BDF7001A54C6 /* DemoAPIManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoAPIManagerViewController.m; sourceTree = "<group>"; };
 		4AB2FB08204586E400770EF1 /* Target_CTAppContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Target_CTAppContext.h; sourceTree = "<group>"; };
 		4AB2FB09204586E400770EF1 /* Target_CTAppContext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Target_CTAppContext.m; sourceTree = "<group>"; };
 		4AB2FB0B204586F900770EF1 /* Target_DemoService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Target_DemoService.h; sourceTree = "<group>"; };
@@ -300,9 +303,27 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		4A4A07BB2045BDE2001A54C6 /* DemoControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4A4A07BC2045BDE2001A54C6 /* DemoAPIManager */,
+			);
+			path = DemoControllers;
+			sourceTree = "<group>";
+		};
+		4A4A07BC2045BDE2001A54C6 /* DemoAPIManager */ = {
+			isa = PBXGroup;
+			children = (
+				4A4A07BD2045BDF7001A54C6 /* DemoAPIManagerViewController.h */,
+				4A4A07BE2045BDF7001A54C6 /* DemoAPIManagerViewController.m */,
+			);
+			path = DemoAPIManager;
+			sourceTree = "<group>";
+		};
 		4AB2FB04204586C400770EF1 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				4A4A07BB2045BDE2001A54C6 /* DemoControllers */,
 				4AB2FB05204586C400770EF1 /* DemoService */,
 				4AB2FB06204586C400770EF1 /* DemoAppContext */,
 				4AB2FB07204586C400770EF1 /* DemoAPIManager */,
@@ -540,6 +561,7 @@
 				4AB2FB0A204586E400770EF1 /* Target_CTAppContext.m in Sources */,
 				4A1E17BA2045585A00BDBF7B /* CTAPIBaseManager.m in Sources */,
 				4AF1D17D20454C4C006736EF /* ViewController.m in Sources */,
+				4A4A07BF2045BDF7001A54C6 /* DemoAPIManagerViewController.m in Sources */,
 				4A1E178F2045560D00BDBF7B /* NSMutableString+AXNetworkingMethods.m in Sources */,
 				4A1E17B72045585A00BDBF7B /* CTURLResponse.m in Sources */,
 				4AB2FB1D2045B03F00770EF1 /* DemoService.m in Sources */,

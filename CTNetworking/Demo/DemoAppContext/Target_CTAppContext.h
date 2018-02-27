@@ -10,8 +10,8 @@
 
 @interface Target_CTAppContext : NSObject
 
-- (BOOL)Action_shouldPrintNetworkingLog;
-- (BOOL)Action_isReachable;
-- (NSInteger)Action_cacheResponseCountLimit;
+- (BOOL)Action_shouldPrintNetworkingLog:(NSDictionary *)params;
+- (BOOL)Action_isReachable:(NSDictionary *)params;
+- (NSInteger)Action_cacheResponseCountLimit:(NSDictionary *)params;
 
 @end

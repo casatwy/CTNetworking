@@ -17,12 +17,9 @@
 static NSString * const kAXApiProxyDispatchItemKeyCallbackSuccess = @"kAXApiProxyDispatchItemCallbackSuccess";
 static NSString * const kAXApiProxyDispatchItemKeyCallbackFail = @"kAXApiProxyDispatchItemCallbackFail";
 
-NSString * const kAXApiProxyValidateResultKeyResponseString = @"kAXApiProxyValidateResultKeyResponseString";
-NSString * const kAXApiProxyValidateResultKeyResponseContent = @"kAXApiProxyValidateResultKeyResponseContent";
-
-NSString * const kAXApiProxyValidateResultKeyResponseContentResCode = @"resCode";
-NSString * const kAXApiProxyValidateResultKeyResponseContentObj = @"obj";
-NSString * const kAXApiProxyValidateResultKeyResponseContentRawDict = @"rawDict";
+NSString * const kCTApiProxyValidateResultKeyResponseJSONObject = @"kCTApiProxyValidateResultKeyResponseJSONObject";
+NSString * const kCTApiProxyValidateResultKeyResponseJSONString = @"kCTApiProxyValidateResultKeyResponseJSONString";
+NSString * const kCTApiProxyValidateResultKeyResponseData = @"kCTApiProxyValidateResultKeyResponseData";
 
 @interface CTApiProxy ()
 
@@ -93,15 +90,15 @@ NSString * const kAXApiProxyValidateResultKeyResponseContentRawDict = @"rawDict"
         
         NSDictionary *result = [request.service resultWithResponseData:responseData response:response request:request error:&error];
         // 输出返回数据
-        CTURLResponse *CTResponse = [[CTURLResponse alloc] initWithResponseString:result[kAXApiProxyValidateResultKeyResponseString]
+        CTURLResponse *CTResponse = [[CTURLResponse alloc] initWithResponseString:result[kCTApiProxyValidateResultKeyResponseJSONString]
                                                                         requestId:requestID
                                                                           request:request
-                                                                  responseContent:result[kAXApiProxyValidateResultKeyResponseContent]
+                                                                  responseContent:result[kCTApiProxyValidateResultKeyResponseJSONObject]
                                                                             error:error];
 
         CTResponse.logString = [CTLogger logDebugInfoWithResponse:(NSHTTPURLResponse *)response
                                                   rawResponseData:responseData
-                                                   responseString:result[kAXApiProxyValidateResultKeyResponseString]
+                                                   responseString:result[kCTApiProxyValidateResultKeyResponseJSONString]
                                                           request:request
                                                             error:error];
 

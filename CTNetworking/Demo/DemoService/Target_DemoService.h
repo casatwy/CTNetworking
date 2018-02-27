@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DemoService.h"
+
+extern NSString * const CTNetworkingDemoServiceIdentifier;
 
 @interface Target_DemoService : NSObject
+
+- (DemoService *)Action_DemoService:(NSDictionary *)params;
 
 @end

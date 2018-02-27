@@ -8,6 +8,13 @@
 
 #import "Target_DemoService.h"
 
+NSString * const CTNetworkingDemoServiceIdentifier = @"DemoService";
+
 @implementation Target_DemoService
+
+- (DemoService *)Action_DemoService:(NSDictionary *)params
+{
+    return [[DemoService alloc] init];
+}
 
 @end

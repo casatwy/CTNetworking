@@ -12,5 +12,7 @@
 #import "CTServiceProtocol.h"
 #import "CTNetworkingDefines.h"
 #import "CTAPIBaseManager.h"
+#import "NSURLRequest+CTNetworkingMethods.h"
+#import "NSString+AXNetworkingMethods.h"
 
 #endif /* CTNetworking_h */

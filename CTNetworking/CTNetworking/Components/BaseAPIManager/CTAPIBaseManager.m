@@ -154,6 +154,9 @@ NSString * const kCTAPIBaseManagerRequestID = @"kCTAPIBaseManagerRequestID";
                 
                 id <CTServiceProtocol> service = [[CTServiceFactory sharedInstance] serviceWithIdentifier:self.child.serviceIdentifier];
                 NSURLRequest *request = [service requestWithParams:reformedParams methodName:self.child.methodName requestType:self.child.requestType];
+                request.service = service;
+                [CTLogger logDebugInfoWithRequest:request apiName:self.child.methodName service:service];
+                
                 NSNumber *requestId = [[CTApiProxy sharedInstance] callApiWithRequest:request success:^(CTURLResponse *response) {
                     [self successedOnCallingAPI:response];
                 } fail:^(CTURLResponse *response) {

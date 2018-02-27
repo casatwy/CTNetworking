@@ -9,14 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "CTURLResponse.h"
 
-extern NSString * const kAXApiProxyValidateResultKeyResponseContentRawDict;
-
-extern NSString * const kAXApiProxyValidateResultKeyResponseString;
-extern NSString * const kAXApiProxyValidateResultKeyResponseContent;
-
-extern NSString * const kAXApiProxyValidateResultKeyResponseContentResCode;
-extern NSString * const kAXApiProxyValidateResultKeyResponseContentObj;
-extern NSString * const kAXApiProxyValidateResultKeyResponseString;
 
 typedef void(^AXCallback)(CTURLResponse *response);
 
