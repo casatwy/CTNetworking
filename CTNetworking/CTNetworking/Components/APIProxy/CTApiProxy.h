@@ -10,13 +10,13 @@
 #import "CTURLResponse.h"
 
 
-typedef void(^AXCallback)(CTURLResponse *response);
+typedef void(^CTCallback)(CTURLResponse *response);
 
 @interface CTApiProxy : NSObject
 
 + (instancetype)sharedInstance;
 
-- (NSNumber *)callApiWithRequest:(NSURLRequest *)request success:(AXCallback)success fail:(AXCallback)fail;
+- (NSNumber *)callApiWithRequest:(NSURLRequest *)request success:(CTCallback)success fail:(CTCallback)fail;
 - (void)cancelRequestWithRequestID:(NSNumber *)requestID;
 - (void)cancelRequestWithRequestIDList:(NSArray *)requestIDList;
 

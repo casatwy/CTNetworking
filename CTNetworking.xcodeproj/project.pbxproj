@@ -24,12 +24,12 @@
 		4A1E17C02045585A00BDBF7B /* CTMemoryCachedRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1E17B02045585A00BDBF7B /* CTMemoryCachedRecord.m */; };
 		4A1E17C12045585A00BDBF7B /* CTDiskCacheCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1E17B42045585A00BDBF7B /* CTDiskCacheCenter.m */; };
 		4A1E17CB2045588E00BDBF7B /* CTServiceFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1E17C92045588E00BDBF7B /* CTServiceFactory.m */; };
-		4A4A07BF2045BDF7001A54C6 /* DemoAPIManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A07BE2045BDF7001A54C6 /* DemoAPIManagerViewController.m */; };
 		4AB2FB0A204586E400770EF1 /* Target_CTAppContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB2FB09204586E400770EF1 /* Target_CTAppContext.m */; };
 		4AB2FB0D204586F900770EF1 /* Target_DemoService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB2FB0C204586F900770EF1 /* Target_DemoService.m */; };
-		4AB2FB102045872200770EF1 /* DemoAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB2FB0F2045872200770EF1 /* DemoAPIManager.m */; };
 		4AB2FB1720458C7200770EF1 /* CTMediator+CTAppContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB2FB1620458C7200770EF1 /* CTMediator+CTAppContext.m */; };
 		4AB2FB1D2045B03F00770EF1 /* DemoService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB2FB1C2045B03F00770EF1 /* DemoService.m */; };
+		4AE4F2F02045C69E002FF604 /* DemoAPIManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE4F2EC2045C69E002FF604 /* DemoAPIManagerViewController.m */; };
+		4AE4F2F12045C69E002FF604 /* DemoAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE4F2EF2045C69E002FF604 /* DemoAPIManager.m */; };
 		4AF1D17A20454C4C006736EF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF1D17920454C4C006736EF /* AppDelegate.m */; };
 		4AF1D17D20454C4C006736EF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF1D17C20454C4C006736EF /* ViewController.m */; };
 		4AF1D18020454C4C006736EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AF1D17E20454C4C006736EF /* Main.storyboard */; };
@@ -77,19 +77,19 @@
 		4A1E17C82045588E00BDBF7B /* CTServiceFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTServiceFactory.h; sourceTree = "<group>"; };
 		4A1E17C92045588E00BDBF7B /* CTServiceFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTServiceFactory.m; sourceTree = "<group>"; };
 		4A1E17CC20455B4200BDBF7B /* CTNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTNetworking.h; sourceTree = "<group>"; };
-		4A4A07BD2045BDF7001A54C6 /* DemoAPIManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoAPIManagerViewController.h; sourceTree = "<group>"; };
-		4A4A07BE2045BDF7001A54C6 /* DemoAPIManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoAPIManagerViewController.m; sourceTree = "<group>"; };
 		4AB2FB08204586E400770EF1 /* Target_CTAppContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Target_CTAppContext.h; sourceTree = "<group>"; };
 		4AB2FB09204586E400770EF1 /* Target_CTAppContext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Target_CTAppContext.m; sourceTree = "<group>"; };
 		4AB2FB0B204586F900770EF1 /* Target_DemoService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Target_DemoService.h; sourceTree = "<group>"; };
 		4AB2FB0C204586F900770EF1 /* Target_DemoService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Target_DemoService.m; sourceTree = "<group>"; };
-		4AB2FB0E2045872200770EF1 /* DemoAPIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoAPIManager.h; sourceTree = "<group>"; };
-		4AB2FB0F2045872200770EF1 /* DemoAPIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoAPIManager.m; sourceTree = "<group>"; };
 		4AB2FB112045890E00770EF1 /* CTNetworkingDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTNetworkingDefines.h; sourceTree = "<group>"; };
 		4AB2FB1520458C7200770EF1 /* CTMediator+CTAppContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CTMediator+CTAppContext.h"; sourceTree = "<group>"; };
 		4AB2FB1620458C7200770EF1 /* CTMediator+CTAppContext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CTMediator+CTAppContext.m"; sourceTree = "<group>"; };
 		4AB2FB1B2045B03F00770EF1 /* DemoService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoService.h; sourceTree = "<group>"; };
 		4AB2FB1C2045B03F00770EF1 /* DemoService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoService.m; sourceTree = "<group>"; };
+		4AE4F2EB2045C69E002FF604 /* DemoAPIManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoAPIManagerViewController.h; sourceTree = "<group>"; };
+		4AE4F2EC2045C69E002FF604 /* DemoAPIManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoAPIManagerViewController.m; sourceTree = "<group>"; };
+		4AE4F2EE2045C69E002FF604 /* DemoAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoAPIManager.h; sourceTree = "<group>"; };
+		4AE4F2EF2045C69E002FF604 /* DemoAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoAPIManager.m; sourceTree = "<group>"; };
 		4AF1D17520454C4C006736EF /* CTNetworking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CTNetworking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AF1D17820454C4C006736EF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4AF1D17920454C4C006736EF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -306,18 +306,9 @@
 		4A4A07BB2045BDE2001A54C6 /* DemoControllers */ = {
 			isa = PBXGroup;
 			children = (
-				4A4A07BC2045BDE2001A54C6 /* DemoAPIManager */,
+				4AE4F2EA2045C69E002FF604 /* DemoAPIManagerViewController */,
 			);
 			path = DemoControllers;
-			sourceTree = "<group>";
-		};
-		4A4A07BC2045BDE2001A54C6 /* DemoAPIManager */ = {
-			isa = PBXGroup;
-			children = (
-				4A4A07BD2045BDF7001A54C6 /* DemoAPIManagerViewController.h */,
-				4A4A07BE2045BDF7001A54C6 /* DemoAPIManagerViewController.m */,
-			);
-			path = DemoAPIManager;
 			sourceTree = "<group>";
 		};
 		4AB2FB04204586C400770EF1 /* Demo */ = {
@@ -326,7 +317,6 @@
 				4A4A07BB2045BDE2001A54C6 /* DemoControllers */,
 				4AB2FB05204586C400770EF1 /* DemoService */,
 				4AB2FB06204586C400770EF1 /* DemoAppContext */,
-				4AB2FB07204586C400770EF1 /* DemoAPIManager */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -351,15 +341,6 @@
 			path = DemoAppContext;
 			sourceTree = "<group>";
 		};
-		4AB2FB07204586C400770EF1 /* DemoAPIManager */ = {
-			isa = PBXGroup;
-			children = (
-				4AB2FB0E2045872200770EF1 /* DemoAPIManager.h */,
-				4AB2FB0F2045872200770EF1 /* DemoAPIManager.m */,
-			);
-			path = DemoAPIManager;
-			sourceTree = "<group>";
-		};
 		4AB2FB1220458C5D00770EF1 /* CTMediator */ = {
 			isa = PBXGroup;
 			children = (
@@ -375,6 +356,25 @@
 				4AB2FB1620458C7200770EF1 /* CTMediator+CTAppContext.m */,
 			);
 			path = AppContext;
+			sourceTree = "<group>";
+		};
+		4AE4F2EA2045C69E002FF604 /* DemoAPIManagerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4AE4F2ED2045C69E002FF604 /* DemoAPIManager */,
+				4AE4F2EB2045C69E002FF604 /* DemoAPIManagerViewController.h */,
+				4AE4F2EC2045C69E002FF604 /* DemoAPIManagerViewController.m */,
+			);
+			path = DemoAPIManagerViewController;
+			sourceTree = "<group>";
+		};
+		4AE4F2ED2045C69E002FF604 /* DemoAPIManager */ = {
+			isa = PBXGroup;
+			children = (
+				4AE4F2EE2045C69E002FF604 /* DemoAPIManager.h */,
+				4AE4F2EF2045C69E002FF604 /* DemoAPIManager.m */,
+			);
+			path = DemoAPIManager;
 			sourceTree = "<group>";
 		};
 		4AF1D16C20454C4C006736EF = {
@@ -556,12 +556,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AE4F2F12045C69E002FF604 /* DemoAPIManager.m in Sources */,
 				4A1E178B2045560D00BDBF7B /* NSArray+AXNetworkingMethods.m in Sources */,
 				4AB2FB0D204586F900770EF1 /* Target_DemoService.m in Sources */,
+				4AE4F2F02045C69E002FF604 /* DemoAPIManagerViewController.m in Sources */,
 				4AB2FB0A204586E400770EF1 /* Target_CTAppContext.m in Sources */,
 				4A1E17BA2045585A00BDBF7B /* CTAPIBaseManager.m in Sources */,
 				4AF1D17D20454C4C006736EF /* ViewController.m in Sources */,
-				4A4A07BF2045BDF7001A54C6 /* DemoAPIManagerViewController.m in Sources */,
 				4A1E178F2045560D00BDBF7B /* NSMutableString+AXNetworkingMethods.m in Sources */,
 				4A1E17B72045585A00BDBF7B /* CTURLResponse.m in Sources */,
 				4AB2FB1D2045B03F00770EF1 /* DemoService.m in Sources */,
@@ -571,7 +572,6 @@
 				4AB2FB1720458C7200770EF1 /* CTMediator+CTAppContext.m in Sources */,
 				4A1E17B62045585A00BDBF7B /* CTLogger.m in Sources */,
 				4A1E17BD2045585A00BDBF7B /* CTApiProxy.m in Sources */,
-				4AB2FB102045872200770EF1 /* DemoAPIManager.m in Sources */,
 				4A1E17BF2045585A00BDBF7B /* CTMemoryCacheDataCenter.m in Sources */,
 				4A1E17BE2045585A00BDBF7B /* CTCacheCenter.m in Sources */,
 				4A1E17B92045585A00BDBF7B /* Target_H5API.m in Sources */,
@@ -716,6 +716,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GQ7926NZY4;
 				INFOPLIST_FILE = CTNetworking/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = casa.CTNetworking;
@@ -730,6 +731,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GQ7926NZY4;
 				INFOPLIST_FILE = CTNetworking/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = casa.CTNetworking;
