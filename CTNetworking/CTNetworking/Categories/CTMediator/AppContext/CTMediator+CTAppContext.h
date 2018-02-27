@@ -10,7 +10,6 @@
 
 @interface CTMediator (CTAppContext)
 
-- (NSString *)CTNetworking_UDIDKeyName;
 - (BOOL)CTNetworking_shouldPrintNetworkingLog;
 - (BOOL)CTNetworking_isReachable;
 - (NSInteger)CTNetworking_cacheResponseCountLimit;

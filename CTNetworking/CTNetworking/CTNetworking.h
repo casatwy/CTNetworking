@@ -9,5 +9,8 @@
 #ifndef CTNetworking_h
 #define CTNetworking_h
 
+#import "CTServiceProtocol.h"
+#import "CTNetworkingDefines.h"
+#import "CTAPIBaseManager.h"
 
 #endif /* CTNetworking_h */

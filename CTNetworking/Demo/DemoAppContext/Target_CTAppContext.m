@@ -10,4 +10,19 @@
 
 @implementation Target_CTAppContext
 
+- (BOOL)Action_isReachable
+{
+    return YES;
+}
+
+- (BOOL)Action_shouldPrintNetworkingLog
+{
+    return YES;
+}
+
+- (NSInteger)Action_cacheResponseCountLimit
+{
+    return 2;
+}
+
 @end

@@ -28,7 +28,7 @@
 		4AB2FB0D204586F900770EF1 /* Target_DemoService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB2FB0C204586F900770EF1 /* Target_DemoService.m */; };
 		4AB2FB102045872200770EF1 /* DemoAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB2FB0F2045872200770EF1 /* DemoAPIManager.m */; };
 		4AB2FB1720458C7200770EF1 /* CTMediator+CTAppContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB2FB1620458C7200770EF1 /* CTMediator+CTAppContext.m */; };
-		4AB2FB1A20458C8400770EF1 /* CTMediator+CTService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB2FB1920458C8400770EF1 /* CTMediator+CTService.m */; };
+		4AB2FB1D2045B03F00770EF1 /* DemoService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB2FB1C2045B03F00770EF1 /* DemoService.m */; };
 		4AF1D17A20454C4C006736EF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF1D17920454C4C006736EF /* AppDelegate.m */; };
 		4AF1D17D20454C4C006736EF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF1D17C20454C4C006736EF /* ViewController.m */; };
 		4AF1D18020454C4C006736EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AF1D17E20454C4C006736EF /* Main.storyboard */; };
@@ -85,8 +85,8 @@
 		4AB2FB112045890E00770EF1 /* CTNetworkingDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTNetworkingDefines.h; sourceTree = "<group>"; };
 		4AB2FB1520458C7200770EF1 /* CTMediator+CTAppContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CTMediator+CTAppContext.h"; sourceTree = "<group>"; };
 		4AB2FB1620458C7200770EF1 /* CTMediator+CTAppContext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CTMediator+CTAppContext.m"; sourceTree = "<group>"; };
-		4AB2FB1820458C8400770EF1 /* CTMediator+CTService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CTMediator+CTService.h"; sourceTree = "<group>"; };
-		4AB2FB1920458C8400770EF1 /* CTMediator+CTService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CTMediator+CTService.m"; sourceTree = "<group>"; };
+		4AB2FB1B2045B03F00770EF1 /* DemoService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoService.h; sourceTree = "<group>"; };
+		4AB2FB1C2045B03F00770EF1 /* DemoService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoService.m; sourceTree = "<group>"; };
 		4AF1D17520454C4C006736EF /* CTNetworking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CTNetworking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AF1D17820454C4C006736EF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4AF1D17920454C4C006736EF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -315,6 +315,8 @@
 			children = (
 				4AB2FB0B204586F900770EF1 /* Target_DemoService.h */,
 				4AB2FB0C204586F900770EF1 /* Target_DemoService.m */,
+				4AB2FB1B2045B03F00770EF1 /* DemoService.h */,
+				4AB2FB1C2045B03F00770EF1 /* DemoService.m */,
 			);
 			path = DemoService;
 			sourceTree = "<group>";
@@ -341,7 +343,6 @@
 			isa = PBXGroup;
 			children = (
 				4AB2FB1320458C5D00770EF1 /* AppContext */,
-				4AB2FB1420458C5D00770EF1 /* Service */,
 			);
 			path = CTMediator;
 			sourceTree = "<group>";
@@ -353,15 +354,6 @@
 				4AB2FB1620458C7200770EF1 /* CTMediator+CTAppContext.m */,
 			);
 			path = AppContext;
-			sourceTree = "<group>";
-		};
-		4AB2FB1420458C5D00770EF1 /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				4AB2FB1820458C8400770EF1 /* CTMediator+CTService.h */,
-				4AB2FB1920458C8400770EF1 /* CTMediator+CTService.m */,
-			);
-			path = Service;
 			sourceTree = "<group>";
 		};
 		4AF1D16C20454C4C006736EF = {
@@ -550,7 +542,7 @@
 				4AF1D17D20454C4C006736EF /* ViewController.m in Sources */,
 				4A1E178F2045560D00BDBF7B /* NSMutableString+AXNetworkingMethods.m in Sources */,
 				4A1E17B72045585A00BDBF7B /* CTURLResponse.m in Sources */,
-				4AB2FB1A20458C8400770EF1 /* CTMediator+CTService.m in Sources */,
+				4AB2FB1D2045B03F00770EF1 /* DemoService.m in Sources */,
 				4A1E178E2045560D00BDBF7B /* NSURLRequest+CTNetworkingMethods.m in Sources */,
 				4A1E17902045560D00BDBF7B /* NSString+AXNetworkingMethods.m in Sources */,
 				4A1E17C02045585A00BDBF7B /* CTMemoryCachedRecord.m in Sources */,
