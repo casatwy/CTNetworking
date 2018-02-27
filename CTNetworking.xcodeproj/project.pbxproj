@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4A1E178B2045560D00BDBF7B /* NSArray+AXNetworkingMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1E17782045560D00BDBF7B /* NSArray+AXNetworkingMethods.m */; };
-		4A1E178C2045560D00BDBF7B /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1E177B2045560D00BDBF7B /* UIDevice+IdentifierAddition.m */; };
 		4A1E178D2045560D00BDBF7B /* NSDictionary+AXNetworkingMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1E177E2045560D00BDBF7B /* NSDictionary+AXNetworkingMethods.m */; };
 		4A1E178E2045560D00BDBF7B /* NSURLRequest+CTNetworkingMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1E17822045560D00BDBF7B /* NSURLRequest+CTNetworkingMethods.m */; };
 		4A1E178F2045560D00BDBF7B /* NSMutableString+AXNetworkingMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1E17842045560D00BDBF7B /* NSMutableString+AXNetworkingMethods.m */; };
@@ -24,8 +23,12 @@
 		4A1E17BF2045585A00BDBF7B /* CTMemoryCacheDataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1E17AD2045585A00BDBF7B /* CTMemoryCacheDataCenter.m */; };
 		4A1E17C02045585A00BDBF7B /* CTMemoryCachedRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1E17B02045585A00BDBF7B /* CTMemoryCachedRecord.m */; };
 		4A1E17C12045585A00BDBF7B /* CTDiskCacheCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1E17B42045585A00BDBF7B /* CTDiskCacheCenter.m */; };
-		4A1E17CA2045588E00BDBF7B /* CTUDIDGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1E17C42045588E00BDBF7B /* CTUDIDGenerator.m */; };
 		4A1E17CB2045588E00BDBF7B /* CTServiceFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1E17C92045588E00BDBF7B /* CTServiceFactory.m */; };
+		4AB2FB0A204586E400770EF1 /* Target_CTAppContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB2FB09204586E400770EF1 /* Target_CTAppContext.m */; };
+		4AB2FB0D204586F900770EF1 /* Target_DemoService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB2FB0C204586F900770EF1 /* Target_DemoService.m */; };
+		4AB2FB102045872200770EF1 /* DemoAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB2FB0F2045872200770EF1 /* DemoAPIManager.m */; };
+		4AB2FB1720458C7200770EF1 /* CTMediator+CTAppContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB2FB1620458C7200770EF1 /* CTMediator+CTAppContext.m */; };
+		4AB2FB1A20458C8400770EF1 /* CTMediator+CTService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB2FB1920458C8400770EF1 /* CTMediator+CTService.m */; };
 		4AF1D17A20454C4C006736EF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF1D17920454C4C006736EF /* AppDelegate.m */; };
 		4AF1D17D20454C4C006736EF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF1D17C20454C4C006736EF /* ViewController.m */; };
 		4AF1D18020454C4C006736EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AF1D17E20454C4C006736EF /* Main.storyboard */; };
@@ -40,8 +43,6 @@
 		2C89AC4DE62717E44D715D01 /* libPods-CTNetworking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CTNetworking.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A1E17782045560D00BDBF7B /* NSArray+AXNetworkingMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+AXNetworkingMethods.m"; sourceTree = "<group>"; };
 		4A1E17792045560D00BDBF7B /* NSArray+AXNetworkingMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+AXNetworkingMethods.h"; sourceTree = "<group>"; };
-		4A1E177B2045560D00BDBF7B /* UIDevice+IdentifierAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+IdentifierAddition.m"; sourceTree = "<group>"; };
-		4A1E177C2045560D00BDBF7B /* UIDevice+IdentifierAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+IdentifierAddition.h"; sourceTree = "<group>"; };
 		4A1E177E2045560D00BDBF7B /* NSDictionary+AXNetworkingMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+AXNetworkingMethods.m"; sourceTree = "<group>"; };
 		4A1E177F2045560D00BDBF7B /* NSDictionary+AXNetworkingMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+AXNetworkingMethods.h"; sourceTree = "<group>"; };
 		4A1E17812045560D00BDBF7B /* NSURLRequest+CTNetworkingMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLRequest+CTNetworkingMethods.h"; sourceTree = "<group>"; };
@@ -71,12 +72,21 @@
 		4A1E17B22045585A00BDBF7B /* CTCacheCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCacheCenter.h; sourceTree = "<group>"; };
 		4A1E17B42045585A00BDBF7B /* CTDiskCacheCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDiskCacheCenter.m; sourceTree = "<group>"; };
 		4A1E17B52045585A00BDBF7B /* CTDiskCacheCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDiskCacheCenter.h; sourceTree = "<group>"; };
-		4A1E17C42045588E00BDBF7B /* CTUDIDGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTUDIDGenerator.m; sourceTree = "<group>"; };
-		4A1E17C52045588E00BDBF7B /* CTUDIDGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTUDIDGenerator.h; sourceTree = "<group>"; };
 		4A1E17C72045588E00BDBF7B /* CTServiceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTServiceProtocol.h; sourceTree = "<group>"; };
 		4A1E17C82045588E00BDBF7B /* CTServiceFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTServiceFactory.h; sourceTree = "<group>"; };
 		4A1E17C92045588E00BDBF7B /* CTServiceFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTServiceFactory.m; sourceTree = "<group>"; };
 		4A1E17CC20455B4200BDBF7B /* CTNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTNetworking.h; sourceTree = "<group>"; };
+		4AB2FB08204586E400770EF1 /* Target_CTAppContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Target_CTAppContext.h; sourceTree = "<group>"; };
+		4AB2FB09204586E400770EF1 /* Target_CTAppContext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Target_CTAppContext.m; sourceTree = "<group>"; };
+		4AB2FB0B204586F900770EF1 /* Target_DemoService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Target_DemoService.h; sourceTree = "<group>"; };
+		4AB2FB0C204586F900770EF1 /* Target_DemoService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Target_DemoService.m; sourceTree = "<group>"; };
+		4AB2FB0E2045872200770EF1 /* DemoAPIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoAPIManager.h; sourceTree = "<group>"; };
+		4AB2FB0F2045872200770EF1 /* DemoAPIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoAPIManager.m; sourceTree = "<group>"; };
+		4AB2FB112045890E00770EF1 /* CTNetworkingDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTNetworkingDefines.h; sourceTree = "<group>"; };
+		4AB2FB1520458C7200770EF1 /* CTMediator+CTAppContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CTMediator+CTAppContext.h"; sourceTree = "<group>"; };
+		4AB2FB1620458C7200770EF1 /* CTMediator+CTAppContext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CTMediator+CTAppContext.m"; sourceTree = "<group>"; };
+		4AB2FB1820458C8400770EF1 /* CTMediator+CTService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CTMediator+CTService.h"; sourceTree = "<group>"; };
+		4AB2FB1920458C8400770EF1 /* CTMediator+CTService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CTMediator+CTService.m"; sourceTree = "<group>"; };
 		4AF1D17520454C4C006736EF /* CTNetworking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CTNetworking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AF1D17820454C4C006736EF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4AF1D17920454C4C006736EF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -105,11 +115,11 @@
 		4A1E17752045549100BDBF7B /* CTNetworking */ = {
 			isa = PBXGroup;
 			children = (
-				4A1E17C22045588E00BDBF7B /* Generators */,
 				4A1E17C62045588E00BDBF7B /* Services */,
 				4A1E17922045585A00BDBF7B /* Components */,
 				4A1E17762045560D00BDBF7B /* Categories */,
 				4A1E17CC20455B4200BDBF7B /* CTNetworking.h */,
+				4AB2FB112045890E00770EF1 /* CTNetworkingDefines.h */,
 			);
 			path = CTNetworking;
 			sourceTree = "<group>";
@@ -117,8 +127,8 @@
 		4A1E17762045560D00BDBF7B /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				4AB2FB1220458C5D00770EF1 /* CTMediator */,
 				4A1E17772045560D00BDBF7B /* Array */,
-				4A1E177A2045560D00BDBF7B /* UIDevice */,
 				4A1E177D2045560D00BDBF7B /* Dictionary */,
 				4A1E17802045560D00BDBF7B /* NSURLRequest */,
 				4A1E17832045560D00BDBF7B /* String */,
@@ -134,15 +144,6 @@
 				4A1E17792045560D00BDBF7B /* NSArray+AXNetworkingMethods.h */,
 			);
 			path = Array;
-			sourceTree = "<group>";
-		};
-		4A1E177A2045560D00BDBF7B /* UIDevice */ = {
-			isa = PBXGroup;
-			children = (
-				4A1E177B2045560D00BDBF7B /* UIDevice+IdentifierAddition.m */,
-				4A1E177C2045560D00BDBF7B /* UIDevice+IdentifierAddition.h */,
-			);
-			path = UIDevice;
 			sourceTree = "<group>";
 		};
 		4A1E177D2045560D00BDBF7B /* Dictionary */ = {
@@ -289,23 +290,6 @@
 			path = DiskCacheDataCenter;
 			sourceTree = "<group>";
 		};
-		4A1E17C22045588E00BDBF7B /* Generators */ = {
-			isa = PBXGroup;
-			children = (
-				4A1E17C32045588E00BDBF7B /* UDIDGenerator */,
-			);
-			path = Generators;
-			sourceTree = "<group>";
-		};
-		4A1E17C32045588E00BDBF7B /* UDIDGenerator */ = {
-			isa = PBXGroup;
-			children = (
-				4A1E17C42045588E00BDBF7B /* CTUDIDGenerator.m */,
-				4A1E17C52045588E00BDBF7B /* CTUDIDGenerator.h */,
-			);
-			path = UDIDGenerator;
-			sourceTree = "<group>";
-		};
 		4A1E17C62045588E00BDBF7B /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,6 +298,70 @@
 				4A1E17C92045588E00BDBF7B /* CTServiceFactory.m */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		4AB2FB04204586C400770EF1 /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				4AB2FB05204586C400770EF1 /* DemoService */,
+				4AB2FB06204586C400770EF1 /* DemoAppContext */,
+				4AB2FB07204586C400770EF1 /* DemoAPIManager */,
+			);
+			path = Demo;
+			sourceTree = "<group>";
+		};
+		4AB2FB05204586C400770EF1 /* DemoService */ = {
+			isa = PBXGroup;
+			children = (
+				4AB2FB0B204586F900770EF1 /* Target_DemoService.h */,
+				4AB2FB0C204586F900770EF1 /* Target_DemoService.m */,
+			);
+			path = DemoService;
+			sourceTree = "<group>";
+		};
+		4AB2FB06204586C400770EF1 /* DemoAppContext */ = {
+			isa = PBXGroup;
+			children = (
+				4AB2FB08204586E400770EF1 /* Target_CTAppContext.h */,
+				4AB2FB09204586E400770EF1 /* Target_CTAppContext.m */,
+			);
+			path = DemoAppContext;
+			sourceTree = "<group>";
+		};
+		4AB2FB07204586C400770EF1 /* DemoAPIManager */ = {
+			isa = PBXGroup;
+			children = (
+				4AB2FB0E2045872200770EF1 /* DemoAPIManager.h */,
+				4AB2FB0F2045872200770EF1 /* DemoAPIManager.m */,
+			);
+			path = DemoAPIManager;
+			sourceTree = "<group>";
+		};
+		4AB2FB1220458C5D00770EF1 /* CTMediator */ = {
+			isa = PBXGroup;
+			children = (
+				4AB2FB1320458C5D00770EF1 /* AppContext */,
+				4AB2FB1420458C5D00770EF1 /* Service */,
+			);
+			path = CTMediator;
+			sourceTree = "<group>";
+		};
+		4AB2FB1320458C5D00770EF1 /* AppContext */ = {
+			isa = PBXGroup;
+			children = (
+				4AB2FB1520458C7200770EF1 /* CTMediator+CTAppContext.h */,
+				4AB2FB1620458C7200770EF1 /* CTMediator+CTAppContext.m */,
+			);
+			path = AppContext;
+			sourceTree = "<group>";
+		};
+		4AB2FB1420458C5D00770EF1 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				4AB2FB1820458C8400770EF1 /* CTMediator+CTService.h */,
+				4AB2FB1920458C8400770EF1 /* CTMediator+CTService.m */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		4AF1D16C20454C4C006736EF = {
@@ -338,6 +386,7 @@
 			isa = PBXGroup;
 			children = (
 				4A1E17752045549100BDBF7B /* CTNetworking */,
+				4AB2FB04204586C400770EF1 /* Demo */,
 				4AF1D17820454C4C006736EF /* AppDelegate.h */,
 				4AF1D17920454C4C006736EF /* AppDelegate.m */,
 				4AF1D17B20454C4C006736EF /* ViewController.h */,
@@ -495,16 +544,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A1E178B2045560D00BDBF7B /* NSArray+AXNetworkingMethods.m in Sources */,
+				4AB2FB0D204586F900770EF1 /* Target_DemoService.m in Sources */,
+				4AB2FB0A204586E400770EF1 /* Target_CTAppContext.m in Sources */,
 				4A1E17BA2045585A00BDBF7B /* CTAPIBaseManager.m in Sources */,
 				4AF1D17D20454C4C006736EF /* ViewController.m in Sources */,
-				4A1E17CA2045588E00BDBF7B /* CTUDIDGenerator.m in Sources */,
 				4A1E178F2045560D00BDBF7B /* NSMutableString+AXNetworkingMethods.m in Sources */,
 				4A1E17B72045585A00BDBF7B /* CTURLResponse.m in Sources */,
+				4AB2FB1A20458C8400770EF1 /* CTMediator+CTService.m in Sources */,
 				4A1E178E2045560D00BDBF7B /* NSURLRequest+CTNetworkingMethods.m in Sources */,
 				4A1E17902045560D00BDBF7B /* NSString+AXNetworkingMethods.m in Sources */,
 				4A1E17C02045585A00BDBF7B /* CTMemoryCachedRecord.m in Sources */,
+				4AB2FB1720458C7200770EF1 /* CTMediator+CTAppContext.m in Sources */,
 				4A1E17B62045585A00BDBF7B /* CTLogger.m in Sources */,
 				4A1E17BD2045585A00BDBF7B /* CTApiProxy.m in Sources */,
+				4AB2FB102045872200770EF1 /* DemoAPIManager.m in Sources */,
 				4A1E17BF2045585A00BDBF7B /* CTMemoryCacheDataCenter.m in Sources */,
 				4A1E17BE2045585A00BDBF7B /* CTCacheCenter.m in Sources */,
 				4A1E17B92045585A00BDBF7B /* Target_H5API.m in Sources */,
@@ -514,7 +567,6 @@
 				4A1E17C12045585A00BDBF7B /* CTDiskCacheCenter.m in Sources */,
 				4AF1D18820454C4C006736EF /* main.m in Sources */,
 				4AF1D17A20454C4C006736EF /* AppDelegate.m in Sources */,
-				4A1E178C2045560D00BDBF7B /* UIDevice+IdentifierAddition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

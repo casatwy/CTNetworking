@@ -9,7 +9,6 @@
 #import <AFNetworking/AFNetworking.h>
 #import "CTApiProxy.h"
 #import "CTServiceFactory.h"
-#import "CTRequestGenerator.h"
 #import "CTLogger.h"
 #import "NSURLRequest+CTNetworkingMethods.h"
 #import "NSString+AXNetworkingMethods.h"
@@ -29,8 +28,6 @@ NSString * const kAXApiProxyValidateResultKeyResponseContentRawDict = @"rawDict"
 
 @property (nonatomic, strong) NSMutableDictionary *dispatchTable;
 @property (nonatomic, strong) NSNumber *recordedRequestId;
-
-//AFNetworking stuff
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
 
 @end
@@ -88,12 +85,13 @@ NSString * const kAXApiProxyValidateResultKeyResponseContentRawDict = @"rawDict"
     // 跑到这里的block的时候，就已经是主线程了。
     __block NSURLSessionDataTask *dataTask = nil;
     dataTask = [self.sessionManager dataTaskWithRequest:request
+                                         uploadProgress:nil
+                                       downloadProgress:nil
                                       completionHandler:^(NSURLResponse * _Nonnull response, NSData * _Nullable responseData, NSError * _Nullable error) {
         NSNumber *requestID = @([dataTask taskIdentifier]);
         [self.dispatchTable removeObjectForKey:requestID];
         
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-        NSDictionary *result = [request.service resultAfterParseWithResponseData:responseData desKey:request.desKey error:&error];
+        NSDictionary *result = [request.service resultWithResponseData:responseData response:response request:request error:&error];
         // 输出返回数据
         CTURLResponse *CTResponse = [[CTURLResponse alloc] initWithResponseString:result[kAXApiProxyValidateResultKeyResponseString]
                                                                         requestId:requestID
@@ -101,7 +99,7 @@ NSString * const kAXApiProxyValidateResultKeyResponseContentRawDict = @"rawDict"
                                                                   responseContent:result[kAXApiProxyValidateResultKeyResponseContent]
                                                                             error:error];
 
-        CTResponse.logString = [CTLogger logDebugInfoWithResponse:httpResponse
+        CTResponse.logString = [CTLogger logDebugInfoWithResponse:(NSHTTPURLResponse *)response
                                                   rawResponseData:responseData
                                                    responseString:result[kAXApiProxyValidateResultKeyResponseString]
                                                           request:request

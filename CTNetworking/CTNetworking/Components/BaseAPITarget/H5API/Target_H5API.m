@@ -44,8 +44,8 @@ NSString * const kCTOriginActionCallbackKeyProgress = @"progress";
     if ([apiManager isKindOfClass:[CTAPIBaseManager class]]) {
         self.APIContextDictionary[apiManager] = @{
                                                   kCTBaseAPITargetAPIContextDataKeyParamsForAPI:paramsForAPI,
-                                                  kBLBaseAPITargetAPIContextDataKeyOriginActionParams:params,
-                                                  kBLBaseAPITargetAPIContextDataKeyParamsAPIManager:apiManager
+                                                  kCTBaseAPITargetAPIContextDataKeyOriginActionParams:params,
+                                                  kCTBaseAPITargetAPIContextDataKeyParamsAPIManager:apiManager
                                                   };
         
         apiManager.delegate = self;
@@ -59,7 +59,7 @@ NSString * const kCTOriginActionCallbackKeyProgress = @"progress";
 #pragma mark - CTAPIManagerCallBackDelegate
 - (void)managerCallAPIDidSuccess:(CTAPIBaseManager *)manager
 {
-    CTH5APICallback successCallback = self.APIContextDictionary[manager][kBLBaseAPITargetAPIContextDataKeyOriginActionParams][kCTOriginActionCallbackKeySuccess];
+    CTH5APICallback successCallback = self.APIContextDictionary[manager][kCTBaseAPITargetAPIContextDataKeyOriginActionParams][kCTOriginActionCallbackKeySuccess];
     if (successCallback) {
         NSMutableDictionary *fetchedData = [manager fetchDataWithReformer:nil];
         if ([fetchedData isKindOfClass:[NSMutableDictionary class]]) {
@@ -72,7 +72,7 @@ NSString * const kCTOriginActionCallbackKeyProgress = @"progress";
 
 - (void)managerCallAPIDidFailed:(CTAPIBaseManager *)manager
 {
-    CTH5APICallback failCallback = self.APIContextDictionary[manager][kBLBaseAPITargetAPIContextDataKeyOriginActionParams][kCTOriginActionCallbackKeyFail];
+    CTH5APICallback failCallback = self.APIContextDictionary[manager][kCTBaseAPITargetAPIContextDataKeyOriginActionParams][kCTOriginActionCallbackKeyFail];
     if (failCallback) {
         failCallback([manager fetchDataWithReformer:nil]);
     }
@@ -82,7 +82,7 @@ NSString * const kCTOriginActionCallbackKeyProgress = @"progress";
 #pragma mark - CTAPIManagerInterceptor
 - (void)manager:(CTAPIBaseManager *)manager didReceiveResponse:(CTURLResponse *)response
 {
-    CTH5APICallback progressCallback = self.APIContextDictionary[manager][kBLBaseAPITargetAPIContextDataKeyOriginActionParams][kCTOriginActionCallbackKeyProgress];
+    CTH5APICallback progressCallback = self.APIContextDictionary[manager][kCTBaseAPITargetAPIContextDataKeyOriginActionParams][kCTOriginActionCallbackKeyProgress];
     if (progressCallback) {
         progressCallback(@{
                            @"result":@"progress",
@@ -93,7 +93,7 @@ NSString * const kCTOriginActionCallbackKeyProgress = @"progress";
 
 - (BOOL)manager:(CTAPIBaseManager *)manager shouldCallAPIWithParams:(NSDictionary *)params
 {
-    CTH5APICallback progressCallback = self.APIContextDictionary[manager][kBLBaseAPITargetAPIContextDataKeyOriginActionParams][kCTOriginActionCallbackKeyProgress];
+    CTH5APICallback progressCallback = self.APIContextDictionary[manager][kCTBaseAPITargetAPIContextDataKeyOriginActionParams][kCTOriginActionCallbackKeyProgress];
     if (progressCallback) {
         progressCallback(@{
                            @"result":@"progress",

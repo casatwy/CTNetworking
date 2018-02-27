@@ -13,9 +13,11 @@
 #import "NSArray+AXNetworkingMethods.h"
 #import "NSURLRequest+CTNetworkingMethods.h"
 #import "NSDictionary+AXNetworkingMethods.h"
+#import "CTMediator+CTAppContext.h"
 
 #import "CTApiProxy.h"
 #import "CTServiceFactory.h"
+#import "CTNetworkingDefines.h"
 
 @interface CTLogger ()
 
@@ -27,19 +29,19 @@
 {
     NSMutableString *logString = nil;
 #ifdef DEBUG
-    if ([CTAppContext sharedInstance].shouldPrintNetworkingLog == NO) {
+    if ([CTMediator sharedInstance].CTNetworking_shouldPrintNetworkingLog == NO) {
         return @"";
     }
     
-    CTServiceAPIEnviroment enviroment = [CTAppContext sharedInstance].apiEnviroment;
+    CTServiceAPIEnvironment enviroment = request.service.apiEnvironment;
     NSString *enviromentString = nil;
-    if (enviroment == CTServiceAPIEnviromentDevelop) {
+    if (enviroment == CTServiceAPIEnvironmentDevelop) {
         enviromentString = @"Develop";
     }
-    if (enviroment == CTServiceAPIEnviromentPreRelease) {
+    if (enviroment == CTServiceAPIEnvironmentReleaseCandidate) {
         enviromentString = @"Pre Release";
     }
-    if (enviroment == CTServiceAPIEnviromentRelease) {
+    if (enviroment == CTServiceAPIEnvironmentRelease) {
         enviromentString = @"Release";
     }
     
@@ -60,10 +62,11 @@
 + (NSString *)logDebugInfoWithResponse:(NSHTTPURLResponse *)response rawResponseData:(NSData *)rawResponseData responseString:(NSString *)responseString request:(NSURLRequest *)request error:(NSError *)error
 {
     NSMutableString *logString = nil;
-    if ([CTAppContext sharedInstance].shouldPrintNetworkingLog == NO) {
+#ifdef DEBUG
+    if ([CTMediator sharedInstance].CTNetworking_shouldPrintNetworkingLog == NO) {
         return @"";
     }
-    
+
     BOOL isSuccess = error ? NO : YES;
     
     logString = [NSMutableString stringWithString:@"\n\n=========================================\nAPI Response\n=========================================\n\n"];
@@ -72,7 +75,7 @@
     [logString appendFormat:@"Content:\n\t%@\n\n", responseString];
     [logString appendFormat:@"Request URL:\n\t%@\n\n", request.URL];
     [logString appendFormat:@"Request Data:\n\t%@\n\n",request.originRequestParams.CT_jsonString];
-//    [logString appendFormat:@"Raw Response String:\n\t%@\n\n", [[NSString alloc] initWithData:rawResponseData encoding:NSUTF8StringEncoding]];
+    [logString appendFormat:@"Raw Response String:\n\t%@\n\n", [[NSString alloc] initWithData:rawResponseData encoding:NSUTF8StringEncoding]];
     [logString appendFormat:@"Raw Response Header:\n\t%@\n\n", response.allHeaderFields];
     if (isSuccess == NO) {
         [logString appendFormat:@"Error Domain:\t\t\t\t\t\t\t%@\n", error.domain];
@@ -82,27 +85,26 @@
         [logString appendFormat:@"Error Localized Recovery Suggestion:\t%@\n\n", error.localizedRecoverySuggestion];
     }
     
-//    [logString appendString:@"\n---------------  Related Request Content  --------------\n"];
+    [logString appendString:@"\n---------------  Related Request Content  --------------\n"];
     
-//    [logString appendURLRequest:request];
+    [logString appendURLRequest:request];
     
     [logString appendFormat:@"=========================================\nResponse End\n=========================================\n\n"];
  
-#ifdef DEBUG
     NSLog(@"%@", logString);
 #endif
     
-    [[BLMediator sharedInstance] MobileTestClientComponent_sendAPIInfo:logString isSuccess:YES];
     return logString;
 }
 
 +(NSString *)logDebugInfoWithCachedResponse:(CTURLResponse *)response methodName:(NSString *)methodName service:(id <CTServiceProtocol>)service params:(NSDictionary *)params
 {
     NSMutableString *logString = nil;
-    if ([CTAppContext sharedInstance].shouldPrintNetworkingLog == NO) {
+#ifdef DEBUG
+    if ([CTMediator sharedInstance].CTNetworking_shouldPrintNetworkingLog == NO) {
         return @"";
     }
-    
+
     logString = [NSMutableString stringWithString:@"\n\n=========================================\nCached Response                             \n=========================================\n\n"];
 
     [logString appendFormat:@"API Name:\t\t%@\n", [methodName CT_defaultValue:@"N/A"]];
@@ -114,11 +116,9 @@
     [logString appendFormat:@"Content:\n\t%@\n\n", response.contentString];
     
     [logString appendFormat:@"\n\n=========================================\nResponse End\n=========================================\n\n"];
-#ifdef DEBUG
     NSLog(@"%@", logString);
 #endif
     
-    [[BLMediator sharedInstance] MobileTestClientComponent_sendAPIInfo:logString isSuccess:YES];
     return logString;
 }
 

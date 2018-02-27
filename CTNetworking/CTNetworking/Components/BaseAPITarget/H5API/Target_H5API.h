@@ -10,8 +10,8 @@
 #import "CTAPIBaseManager.h"
 
 extern NSString * const kCTBaseAPITargetAPIContextDataKeyParamsForAPI;
-extern NSString * const kBLBaseAPITargetAPIContextDataKeyParamsAPIManager;
-extern NSString * const kBLBaseAPITargetAPIContextDataKeyOriginActionParams;
+extern NSString * const kCTBaseAPITargetAPIContextDataKeyParamsAPIManager;
+extern NSString * const kCTBaseAPITargetAPIContextDataKeyOriginActionParams;
 
 @interface Target_H5API : NSObject <CTAPIManagerCallBackDelegate, CTAPIManagerParamSource, CTAPIManagerInterceptor>
 

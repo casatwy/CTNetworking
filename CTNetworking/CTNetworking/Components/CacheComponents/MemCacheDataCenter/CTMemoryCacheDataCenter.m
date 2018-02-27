@@ -8,6 +8,7 @@
 
 #import "CTMemoryCacheDataCenter.h"
 #import "CTMemoryCachedRecord.h"
+#import "CTMediator+CTAppContext.h"
 
 @interface CTMemoryCacheDataCenter ()
 
@@ -53,8 +54,7 @@
 {
     if (_cache == nil) {
         _cache = [[NSCache alloc] init];
-#warning todo fetch from target-action
-//        _cache.countLimit = kCTCacheCountLimit;
+        _cache.countLimit = [[CTMediator sharedInstance] CTNetworking_cacheResponseCountLimit];
     }
     return _cache;
 }

@@ -11,33 +11,14 @@
 #import "CTCacheCenter.h"
 #import "CTLogger.h"
 #import "CTServiceFactory.h"
-#import "CTAppContext.h"
 #import "CTApiProxy.h"
+#import "CTMediator+CTAppContext.h"
 
-#define AXCallAPI(REQUEST_METHOD, REQUEST_ID)                                                       \
-{                                                                                                   \
-    REQUEST_ID = [[CTApiProxy sharedInstance] call##REQUEST_METHOD##WithParams:reformedParams serviceIdentifier:self.child.serviceType methodName:self.child.methodName shouldAppendCommonParams:self.shouldAppendCommonParams success:^(CTURLResponse *response) {           \
-        [self successedOnCallingAPI:response];                                                \
-    } fail:^(CTURLResponse *response) {                                                             \
-        CTAPIManagerErrorType errorType = CTAPIManagerErrorTypeDefault;                             \
-        if (response.status == CTURLResponseStatusErrorCancel) {                                    \
-            errorType = CTAPIManagerErrorTypeCanceled;                                              \
-        }                                                                                           \
-        if (response.status == CTURLResponseStatusErrorTimeout) {                                   \
-            errorType = CTAPIManagerErrorTypeTimeout;                                               \
-        }                                                                                           \
-        if (response.status == CTURLResponseStatusErrorNoNetwork) {                                 \
-            errorType = CTAPIManagerErrorTypeNoNetWork;                                             \
-        }                                                                                           \
-        [self failedOnCallingAPI:response withErrorType:errorType];                           \
-    }];                                                                                             \
-    [self.requestIdList addObject:@(REQUEST_ID)];                                                   \
-}
+NSString * const kCTUserTokenInvalidNotification = @"kCTUserTokenInvalidNotification";
+NSString * const kCTUserTokenIllegalNotification = @"kCTUserTokenIllegalNotification";
 
-NSString * const kBSUserTokenInvalidNotification = @"kBSUserTokenInvalidNotification";
-NSString * const kBSUserTokenIllegalNotification = @"kBSUserTokenIllegalNotification";
-
-NSString * const kBSUserTokenNotificationUserInfoKeyManagerToContinue = @"kBSUserTokenNotificationUserInfoKeyManagerToContinue";
+NSString * const kCTUserTokenNotificationUserInfoKeyManagerToContinue = @"kCTUserTokenNotificationUserInfoKeyManagerToContinue";
+NSString * const kCTAPIBaseManagerRequestID = @"kCTAPIBaseManagerRequestID";
 
 
 @interface CTAPIBaseManager ()
@@ -69,9 +50,7 @@ NSString * const kBSUserTokenNotificationUserInfoKeyManagerToContinue = @"kBSUse
         
         _errorMessage = nil;
         _errorType = CTAPIManagerErrorTypeDefault;
-        _shouldDisableAutoLogin = NO;
-        _shouldAppendCommonParams = YES;
-        
+
         _memoryCacheSecond = 3 * 60;
         _diskCacheSecond = 3 * 60;
         
@@ -124,11 +103,6 @@ NSString * const kBSUserTokenNotificationUserInfoKeyManagerToContinue = @"kBSUse
 #pragma mark - calling api
 - (NSInteger)loadData
 {
-    if ([[CTAppContext sharedInstance] shouldDownGradeAPIWithAPIMethodName:self.child.methodName pageName:self.currentPageName]) {
-        [self failedOnCallingAPI:nil withErrorType:CTAPIManagerErrorTypeDownGrade];
-        return 0;
-    }
-    
     NSDictionary *params = [self.paramSource paramsForApi:self];
     NSInteger requestId = [self loadDataWithParams:params];
     return requestId;
@@ -161,12 +135,12 @@ NSString * const kBSUserTokenNotificationUserInfoKeyManagerToContinue = @"kBSUse
             CTURLResponse *response = nil;
             // 先检查一下是否有内存缓存
             if ((self.cachePolicy & CTAPIManagerCachePolicyMemory) && self.shouldIgnoreCache == NO) {
-                response = [[CTCacheCenter sharedInstance] fetchMemoryCacheWithServiceIdentifier:self.child.serviceType methodName:self.child.methodName params:reformedParams];
+                response = [[CTCacheCenter sharedInstance] fetchMemoryCacheWithServiceIdentifier:self.child.serviceIdentifier methodName:self.child.methodName params:reformedParams];
             }
             
             // 再检查是否有磁盘缓存
             if ((self.cachePolicy & CTAPIManagerCachePolicyDisk) && self.shouldIgnoreCache == NO) {
-                response = [[CTCacheCenter sharedInstance] fetchDiskCacheWithServiceIdentifier:self.child.serviceType methodName:self.child.methodName params:reformedParams];
+                response = [[CTCacheCenter sharedInstance] fetchDiskCacheWithServiceIdentifier:self.child.serviceIdentifier methodName:self.child.methodName params:reformedParams];
             }
             
             if (response != nil) {
@@ -177,26 +151,30 @@ NSString * const kBSUserTokenNotificationUserInfoKeyManagerToContinue = @"kBSUse
             // 实际的网络请求
             if ([self isReachable]) {
                 self.isLoading = YES;
-                    switch (self.child.requestType)
-                    {
-                        case CTAPIManagerRequestTypePost:
-                        {
-                            AXCallAPI(POST, requestId);
-                        }
-                            break;
-                        case CTAPIManagerRequestTypeGet:
-                        {
-                            AXCallAPI(GET, requestId);
-                        }
-                            break;
-                        default:
-                            break;
+                
+                id <CTServiceProtocol> service = [[CTServiceFactory sharedInstance] serviceWithIdentifier:self.child.serviceIdentifier];
+                NSURLRequest *request = [service requestWithParams:reformedParams methodName:self.child.methodName requestType:self.child.requestType];
+                NSNumber *requestId = [[CTApiProxy sharedInstance] callApiWithRequest:request success:^(CTURLResponse *response) {
+                    [self successedOnCallingAPI:response];
+                } fail:^(CTURLResponse *response) {
+                    CTAPIManagerErrorType errorType = CTAPIManagerErrorTypeDefault;
+                    if (response.status == CTURLResponseStatusErrorCancel) {
+                        errorType = CTAPIManagerErrorTypeCanceled;
                     }
-            
+                    if (response.status == CTURLResponseStatusErrorTimeout) {
+                        errorType = CTAPIManagerErrorTypeTimeout;
+                    }
+                    if (response.status == CTURLResponseStatusErrorNoNetwork) {
+                        errorType = CTAPIManagerErrorTypeNoNetWork;
+                    }
+                    [self failedOnCallingAPI:response withErrorType:errorType];
+                }];
+                [self.requestIdList addObject:requestId];
+                
                 NSMutableDictionary *params = [reformedParams mutableCopy];
-                params[kCTAPIBaseManagerRequestID] = @(requestId);
+                params[kCTAPIBaseManagerRequestID] = requestId;
                 [self afterCallingAPIWithParams:params];
-                return requestId;
+                return [requestId integerValue];
             
             } else {
                 [self failedOnCallingAPI:nil withErrorType:CTAPIManagerErrorTypeNoNetWork];
@@ -230,11 +208,17 @@ NSString * const kBSUserTokenNotificationUserInfoKeyManagerToContinue = @"kBSUse
         
         if (self.cachePolicy != CTAPIManagerCachePolicyNoCache && response.isCache == NO) {
             if (self.cachePolicy & CTAPIManagerCachePolicyMemory) {
-                [[CTCacheCenter sharedInstance] saveMemoryCacheWithResponse:response serviceIdentifier:self.child.serviceType methodName:self.child.methodName cacheTime:self.memoryCacheSecond];
+                [[CTCacheCenter sharedInstance] saveMemoryCacheWithResponse:response
+                                                          serviceIdentifier:self.child.serviceIdentifier
+                                                                 methodName:self.child.methodName
+                                                                  cacheTime:self.memoryCacheSecond];
             }
             
             if (self.cachePolicy & CTAPIManagerCachePolicyDisk) {
-                [[CTCacheCenter sharedInstance] saveDiskCacheWithResponse:response serviceIdentifier:self.child.serviceType methodName:self.child.methodName cacheTime:self.diskCacheSecond];
+                [[CTCacheCenter sharedInstance] saveDiskCacheWithResponse:response
+                                                        serviceIdentifier:self.child.serviceIdentifier
+                                                               methodName:self.child.methodName
+                                                                cacheTime:self.diskCacheSecond];
             }
         }
         
@@ -266,13 +250,12 @@ NSString * const kBSUserTokenNotificationUserInfoKeyManagerToContinue = @"kBSUse
     self.errorType = errorType;
     [self removeRequestIdWithRequestID:response.requestId];
 
-    if (self.shouldDisableAutoLogin == NO) {
         // user token 无效，重新登录
         if (errorType == CTAPIManagerErrorTypeNeedLogin) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kBSUserTokenIllegalNotification
+            [[NSNotificationCenter defaultCenter] postNotificationName:kCTUserTokenIllegalNotification
                                                                 object:nil
                                                               userInfo:@{
-                                                                         kBSUserTokenNotificationUserInfoKeyManagerToContinue:self
+                                                                         kCTUserTokenNotificationUserInfoKeyManagerToContinue:self
                                                                          }];
             return;
         }
@@ -283,21 +266,20 @@ NSString * const kBSUserTokenNotificationUserInfoKeyManagerToContinue = @"kBSUse
             || [resCode isEqualToString:@"05111002"]
             || [resCode isEqualToString:@"1080002"]
             ) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kBSUserTokenIllegalNotification
+            [[NSNotificationCenter defaultCenter] postNotificationName:kCTUserTokenIllegalNotification
                                                                 object:nil
                                                               userInfo:@{
-                                                                         kBSUserTokenNotificationUserInfoKeyManagerToContinue:self
+                                                                         kCTUserTokenNotificationUserInfoKeyManagerToContinue:self
                                                                          }];
             return;
         }
-    }
 
     // 可以自动处理的错误
     if (errorType == CTAPIManagerErrorTypeNeedAccessToken) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kBSUserTokenInvalidNotification
+        [[NSNotificationCenter defaultCenter] postNotificationName:kCTUserTokenInvalidNotification
                                                             object:nil
                                                           userInfo:@{
-                                                                     kBSUserTokenNotificationUserInfoKeyManagerToContinue:self
+                                                                     kCTUserTokenNotificationUserInfoKeyManagerToContinue:self
                                                                      }];
         return;
     }
@@ -308,10 +290,10 @@ NSString * const kBSUserTokenNotificationUserInfoKeyManagerToContinue = @"kBSUse
         || [errorCode isEqualToString:@"BL10015"]
         ) {
         // token 失效
-        [[NSNotificationCenter defaultCenter] postNotificationName:kBSUserTokenInvalidNotification
+        [[NSNotificationCenter defaultCenter] postNotificationName:kCTUserTokenInvalidNotification
                                                             object:nil
                                                           userInfo:@{
-                                                                     kBSUserTokenNotificationUserInfoKeyManagerToContinue:self
+                                                                     kCTUserTokenNotificationUserInfoKeyManagerToContinue:self
                                                                      }];
         return;
     }
@@ -463,7 +445,7 @@ NSString * const kBSUserTokenNotificationUserInfoKeyManagerToContinue = @"kBSUse
 
 - (BOOL)isReachable
 {
-    BOOL isReachability = [CTAppContext sharedInstance].isReachable;
+    BOOL isReachability = [[CTMediator sharedInstance] CTNetworking_isReachable];
     if (!isReachability) {
         self.errorType = CTAPIManagerErrorTypeNoNetWork;
     }
@@ -476,14 +458,6 @@ NSString * const kBSUserTokenNotificationUserInfoKeyManagerToContinue = @"kBSUse
         _isLoading = NO;
     }
     return _isLoading;
-}
-
-- (NSString *)currentPageName
-{
-    if (_currentPageName == nil) {
-        _currentPageName = @"";
-    }
-    return _currentPageName;
 }
 
 @end

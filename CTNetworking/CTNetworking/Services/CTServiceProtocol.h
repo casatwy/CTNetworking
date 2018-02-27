@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "CTNetworkingDefines.h"
 
 @protocol CTServiceProtocol <NSObject>
 
-- (NSURLRequest *)GETRequestWithRequestParams:(NSDictionary *)params methodName:(NSString *)methodName shouldAppendCommonParams:(BOOL)shouldAppendCommonParams;
-- (NSURLRequest *)POSTRequestWithRequestParams:(NSDictionary *)params methodName:(NSString *)methodName shouldAppendCommonParams:(BOOL)shouldAppendCommonParams;
-- (NSDictionary *)resultAfterParseWithResponseData:(NSData *)responseData desKey:(NSString *)desKey error:(NSError **)error;
+@property (nonatomic, assign) CTServiceAPIEnvironment apiEnvironment;
+- (NSURLRequest *)requestWithParams:(NSDictionary *)params methodName:(NSString *)methodName requestType:(CTAPIManagerRequestType)requestType;
+- (NSDictionary *)resultWithResponseData:(NSData *)responseData response:(NSURLResponse *)response request:(NSURLRequest *)request error:(NSError **)error;
 
 @end
