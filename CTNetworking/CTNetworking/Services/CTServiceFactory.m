@@ -7,12 +7,7 @@
 //
 
 #import "CTServiceFactory.h"
-
-#import "BLHTTPSService.h"
-#import "BLOpenAPIService.h"
-#import "RisoService.h"
-#import "AmapService.h"
-#import <BLMediator/BLMediator.h>
+#import <CTMediator/CTMediator.h>
 
 /*************************************************************************/
 
@@ -56,23 +51,7 @@
 #pragma mark - private methods
 - (id <CTServiceProtocol>)newServiceWithIdentifier:(NSString *)identifier
 {
-    if ([identifier isEqualToString:kCTServiceBLHTTPSService]) {
-        return [[BLHTTPSService alloc] init];
-    }
-    
-    if ([identifier isEqualToString:kCTServiceBLOpenAPIService]) {
-        return [[BLOpenAPIService alloc] init];
-    }
-    
-    if ([identifier isEqualToString:kCTServiceRisoService]) {
-        return [[RisoService alloc] init];
-    }
-
-    if ([identifier isEqualToString:kCTServiceAmapService]) {
-        return [[AmapService alloc] init];
-    }
-    
-    return [[BLMediator sharedInstance] performTarget:identifier action:identifier params:nil shouldCacheTarget:NO];
+    return [[CTMediator sharedInstance] performTarget:identifier action:identifier params:nil shouldCacheTarget:NO];
 }
 
 @end

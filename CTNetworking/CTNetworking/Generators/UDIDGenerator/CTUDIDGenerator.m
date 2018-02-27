@@ -7,8 +7,6 @@
 //
 
 #import "CTUDIDGenerator.h"
-#import "CTNetworkingConfiguration.h"
-#import <CTAppContext/CTAppContext.h>
 
 @implementation CTUDIDGenerator
 

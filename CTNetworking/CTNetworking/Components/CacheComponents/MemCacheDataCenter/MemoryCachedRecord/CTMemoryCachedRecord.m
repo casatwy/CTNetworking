@@ -7,7 +7,6 @@
 //
 
 #import "CTMemoryCachedRecord.h"
-#import "CTNetworkingConfiguration.h"
 
 @interface CTMemoryCachedRecord ()
 

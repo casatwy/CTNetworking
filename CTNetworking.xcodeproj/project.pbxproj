@@ -76,6 +76,7 @@
 		4A1E17C72045588E00BDBF7B /* CTServiceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTServiceProtocol.h; sourceTree = "<group>"; };
 		4A1E17C82045588E00BDBF7B /* CTServiceFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTServiceFactory.h; sourceTree = "<group>"; };
 		4A1E17C92045588E00BDBF7B /* CTServiceFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTServiceFactory.m; sourceTree = "<group>"; };
+		4A1E17CC20455B4200BDBF7B /* CTNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTNetworking.h; sourceTree = "<group>"; };
 		4AF1D17520454C4C006736EF /* CTNetworking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CTNetworking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AF1D17820454C4C006736EF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4AF1D17920454C4C006736EF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -108,6 +109,7 @@
 				4A1E17C62045588E00BDBF7B /* Services */,
 				4A1E17922045585A00BDBF7B /* Components */,
 				4A1E17762045560D00BDBF7B /* Categories */,
+				4A1E17CC20455B4200BDBF7B /* CTNetworking.h */,
 			);
 			path = CTNetworking;
 			sourceTree = "<group>";

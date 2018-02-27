@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "CTURLResponse.h"
-#import <CTAppContext/CTAppContext.h>
 
 extern NSString * _Nonnull const kBSUserTokenInvalidNotification;
 extern NSString * _Nonnull const kBSUserTokenIllegalNotification;

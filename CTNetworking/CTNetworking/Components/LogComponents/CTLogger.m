@@ -14,11 +14,8 @@
 #import "NSURLRequest+CTNetworkingMethods.h"
 #import "NSDictionary+AXNetworkingMethods.h"
 
-#import "CTCommonParamsGenerator.h"
-#import "CTAppContext.h"
 #import "CTApiProxy.h"
 #import "CTServiceFactory.h"
-#import <BLBusinessCategoryMobileTestClientComponent/BLMediator+MobileTestClientComponent.h>
 
 @interface CTLogger ()
 

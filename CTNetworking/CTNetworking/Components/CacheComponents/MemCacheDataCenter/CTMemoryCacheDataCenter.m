@@ -7,7 +7,6 @@
 //
 
 #import "CTMemoryCacheDataCenter.h"
-#import "CTNetworkingConfiguration.h"
 #import "CTMemoryCachedRecord.h"
 
 @interface CTMemoryCacheDataCenter ()
@@ -54,7 +53,8 @@
 {
     if (_cache == nil) {
         _cache = [[NSCache alloc] init];
-        _cache.countLimit = kCTCacheCountLimit;
+#warning todo fetch from target-action
+//        _cache.countLimit = kCTCacheCountLimit;
     }
     return _cache;
 }
