@@ -17,4 +17,4 @@ say "current version is ${VersionNumber}, new version is ${NewVersionNumber}"
 git commit -am ${NewVersionNumber}
 git tag ${NewVersionNumber}
 git push origin master --tags
-cd ~/.cocoapods/repos/BLRepositories && git pull origin master && cd - && pod repo push BLRepositories CTNetworking.podspec --verbose --allow-warnings --use-libraries
+pod trunk push ./CTNetworking.podspec --verbose --use-libraries --allow-warnings
