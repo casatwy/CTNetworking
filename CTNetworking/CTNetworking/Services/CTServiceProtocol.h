@@ -11,7 +11,7 @@
 
 @protocol CTServiceProtocol <NSObject>
 
-- (CTServiceAPIEnvironment)apiEnvironment;
+@property (nonatomic, assign)CTServiceAPIEnvironment apiEnvironment;
 - (NSURLRequest *)requestWithParams:(NSDictionary *)params methodName:(NSString *)methodName requestType:(CTAPIManagerRequestType)requestType;
 - (NSDictionary *)resultWithResponseData:(NSData *)responseData response:(NSURLResponse *)response request:(NSURLRequest *)request error:(NSError **)error;
 

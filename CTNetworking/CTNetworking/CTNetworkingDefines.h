@@ -60,6 +60,22 @@ extern NSString * _Nonnull const kCTApiProxyValidateResultKeyResponseJSONObject;
 extern NSString * _Nonnull const kCTApiProxyValidateResultKeyResponseJSONString;
 extern NSString * _Nonnull const kCTApiProxyValidateResultKeyResponseData;
 
+/*************************************************************************************/
+@protocol CTAPIManager <NSObject>
+
+@required
+- (NSString *_Nonnull)methodName;
+- (NSString *_Nonnull)serviceIdentifier;
+- (CTAPIManagerRequestType)requestType;
+
+@optional
+- (void)cleanData;
+- (NSDictionary *_Nullable)reformParams:(NSDictionary *_Nullable)params;
+- (NSInteger)loadDataWithParams:(NSDictionary *_Nullable)params;
+
+@end
+
+/*************************************************************************************/
 @protocol CTAPIManagerInterceptor <NSObject>
 
 @optional
@@ -71,9 +87,11 @@ extern NSString * _Nonnull const kCTApiProxyValidateResultKeyResponseData;
 
 - (BOOL)manager:(CTAPIBaseManager *_Nonnull)manager shouldCallAPIWithParams:(NSDictionary *_Nullable)params;
 - (void)manager:(CTAPIBaseManager *_Nonnull)manager afterCallingAPIWithParams:(NSDictionary *_Nullable)params;
-- (void)manager:(CTAPIBaseManager *_Nonnull)manager didReceiveResponse:(CTURLResponse *_Nonnull)response;
+- (void)manager:(CTAPIBaseManager *_Nonnull)manager didReceiveResponse:(CTURLResponse *_Nullable)response;
 
 @end
+
+/*************************************************************************************/
 
 @protocol CTAPIManagerCallBackDelegate <NSObject>
 @required
@@ -92,10 +110,14 @@ extern NSString * _Nonnull const kCTApiProxyValidateResultKeyResponseData;
 
 @end
 
+/*************************************************************************************/
+
 @protocol CTAPIManagerDataReformer <NSObject>
 @required
 - (id _Nullable)manager:(CTAPIBaseManager * _Nonnull)manager reformData:(NSDictionary * _Nullable)data;
 @end
+
+/*************************************************************************************/
 
 @protocol CTAPIManagerValidator <NSObject>
 @required
@@ -103,23 +125,11 @@ extern NSString * _Nonnull const kCTApiProxyValidateResultKeyResponseData;
 - (CTAPIManagerErrorType)manager:(CTAPIBaseManager *_Nonnull)manager isCorrectWithParamsData:(NSDictionary *_Nullable)data;
 @end
 
+/*************************************************************************************/
+
 @protocol CTAPIManagerParamSource <NSObject>
 @required
 - (NSDictionary *_Nullable)paramsForApi:(CTAPIBaseManager *_Nonnull)manager;
-@end
-
-@protocol CTAPIManager <NSObject>
-
-@required
-- (NSString *_Nonnull)methodName;
-- (NSString *_Nonnull)serviceIdentifier;
-- (CTAPIManagerRequestType)requestType;
-
-@optional
-- (void)cleanData;
-- (NSDictionary *_Nullable)reformParams:(NSDictionary *_Nullable)params;
-- (NSInteger)loadDataWithParams:(NSDictionary *_Nullable)params;
-
 @end
 
 #endif /* CTNetworkingDefines_h */

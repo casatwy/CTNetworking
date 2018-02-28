@@ -10,11 +10,6 @@
 
 @implementation CTMediator (CTAppContext)
 
-- (NSString *)CTNetworking_UDIDKeyName
-{
-    return [[CTMediator sharedInstance] performTarget:@"CTAppContext" action:@"UDIDKeyName" params:nil shouldCacheTarget:YES];
-}
-
 - (BOOL)CTNetworking_shouldPrintNetworkingLog
 {
     return [[[CTMediator sharedInstance] performTarget:@"CTAppContext" action:@"shouldPrintNetworkingLog" params:nil shouldCacheTarget:YES] boolValue];

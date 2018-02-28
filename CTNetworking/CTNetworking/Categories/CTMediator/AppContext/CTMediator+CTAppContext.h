@@ -6,7 +6,7 @@
 //  Copyright © 2018年 casa. All rights reserved.
 //
 
-#import "CTMediator.h"
+#import <CTMediator/CTMediator.h>
 
 @interface CTMediator (CTAppContext)
 
