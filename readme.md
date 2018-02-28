@@ -1,5 +1,3 @@
-Developing
-==========
 
 pod "CTNetworking"
 
