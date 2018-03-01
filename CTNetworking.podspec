@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CTNetworking"
-  s.version      = "1"
+  s.version      = "4"
   s.summary      = "CTNetworking."
 
   # This description is used to generate tags and improve search results.
@@ -134,5 +134,6 @@ Pod::Spec.new do |s|
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   s.dependency "AFNetworking"
+  s.dependency "CTMediator"
 
 end
