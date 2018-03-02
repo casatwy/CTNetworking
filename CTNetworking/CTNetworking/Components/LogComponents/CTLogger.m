@@ -89,7 +89,7 @@
     
     [logString appendURLRequest:request];
     
-    [logString appendFormat:@"=========================================\nResponse End\n=========================================\n\n"];
+    [logString appendFormat:@"\n\n=========================================\nResponse End\n=========================================\n\n"];
  
     NSLog(@"%@", logString);
 #endif
