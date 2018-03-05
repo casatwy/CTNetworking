@@ -1,10 +1,12 @@
 
 pod "CTNetworking"
 
-related projects
+Related Projects
 ----------------
 
-[https://github.com/CTAPIs/CTAPI_Marvel](https://github.com/CTAPIs/CTAPI_Marvel) Marvel iOS API managers based on CTNetworking, you can also see it as a demo for how to use CTNetworking
+[CTAPI_AMap](https://github.com/CTAPIs/CTAPI_AMap)
+
+[CTAPI_Marvel](https://github.com/CTAPIs/CTAPI_Marvel)
 
 pagable api manager demo see [CTAPI_Marvel](https://github.com/CTAPIs/CTAPI_Marvel)
 
