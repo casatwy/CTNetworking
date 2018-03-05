@@ -6,10 +6,11 @@ related projects
 
 [https://github.com/CTAPIs/CTAPI_Marvel](https://github.com/CTAPIs/CTAPI_Marvel) Marvel iOS API managers based on CTNetworking, you can also see it as a demo for how to use CTNetworking
 
+pagable api manager demo see [CTAPI_Marvel](https://github.com/CTAPIs/CTAPI_Marvel)
+
 todo
 ----
 
-- pagable api manager demo
 - group call api manager demo
 - dependented call api manager demo
 - memory cache demo
