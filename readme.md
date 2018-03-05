@@ -8,7 +8,7 @@ Related Projects
 
 [CTAPI_Marvel](https://github.com/CTAPIs/CTAPI_Marvel)
 
-pagable api manager demo see [CTAPI_Marvel](https://github.com/CTAPIs/CTAPI_Marvel)
+demos of `pagable api manager`, `param source`, `params in URL for GET`, `validator` see [CTAPI_Marvel](https://github.com/CTAPIs/CTAPI_Marvel)
 
 todo
 ----
@@ -19,9 +19,6 @@ todo
 - disk cache demo
 - auto login demo
 - reformer demo
-- validator demo
-- param source demo
-- body param and url param mixed demo
 - websocket call api demo
 - h5 call api demo
 - swift call api demo
