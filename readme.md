@@ -1,6 +1,8 @@
 
 pod "CTNetworking"
 
+replacement for [RTNetworking](https://github.com/casatwy/RTNetworking)
+
 Related Projects
 ----------------
 
