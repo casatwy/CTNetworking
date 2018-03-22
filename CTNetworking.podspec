@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CTNetworking"
-  s.version      = "8"
+  s.version      = "9"
   s.summary      = "CTNetworking."
 
   # This description is used to generate tags and improve search results.
