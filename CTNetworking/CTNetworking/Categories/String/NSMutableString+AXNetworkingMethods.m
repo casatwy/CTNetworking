@@ -31,7 +31,7 @@
     [self appendFormat:@" -X %@", request.HTTPMethod];
     
     if (headerString.length > 0) {
-        [self appendFormat:@"%@", headerString];
+        [self appendString:headerString];
     }
     if (request.HTTPBody.length > 0) {
         [self appendFormat:@" -d '%@'", [[[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding] CT_defaultValue:@"\t\t\t\tN/A"]];
