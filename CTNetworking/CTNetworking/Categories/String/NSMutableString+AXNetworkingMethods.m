@@ -27,14 +27,17 @@
         [headerString appendString:header];
     }];
 
-    if ([request.HTTPMethod isEqualToString:@"POST"]) {
-        [self appendFormat:@"\n\nCURL:\n\t curl -X POST%@ -d \"%@\" %@", headerString, [[[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding] CT_defaultValue:@"\t\t\t\tN/A"], request.URL];
+    [self appendString:@"\n\nCURL:\n\t curl"];
+    [self appendFormat:@" -X %@", request.HTTPMethod];
+    
+    if (headerString.length > 0) {
+        [self appendFormat:@"%@", headerString];
     }
-
-    if ([request.HTTPMethod isEqualToString:@"GET"]) {
-        [self appendFormat:@"\n\nCURL:\n\t curl %@", request.URL];
+    if (request.HTTPBody.length > 0) {
+        [self appendFormat:@" -d '%@'", [[[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding] CT_defaultValue:@"\t\t\t\tN/A"]];
     }
-
+    
+    [self appendFormat:@" %@", request.URL];
 }
 
 @end
