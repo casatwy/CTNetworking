@@ -12,6 +12,8 @@ Related Projects
 
 demos of `pagable api manager`, `param source`, `params in URL for GET`, `validator` see [CTAPI_Marvel](https://github.com/CTAPIs/CTAPI_Marvel)
 
+`websocket call api`, `H5 call api` demo, see [CTJSBridge](https://github.com/casatwy/CTJSBridge)
+
 todo
 ----
 
@@ -21,6 +23,4 @@ todo
 - disk cache demo
 - auto login demo
 - reformer demo
-- websocket call api demo
-- h5 call api demo
 - swift call api demo
