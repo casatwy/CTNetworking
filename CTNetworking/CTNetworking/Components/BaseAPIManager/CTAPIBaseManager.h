@@ -38,6 +38,9 @@
 - (NSInteger)loadData;
 + (NSInteger)loadDataWithParams:(NSDictionary * _Nullable)params success:(void (^ _Nullable)(CTAPIBaseManager * _Nonnull apiManager))successCallback fail:(void (^ _Nullable)(CTAPIBaseManager * _Nonnull apiManager))failCallback;
 
+// reload
+- (NSInteger)reloadData;
+
 // cancel
 - (void)cancelAllRequests;
 - (void)cancelRequestWithRequestId:(NSInteger)requestID;

@@ -29,6 +29,7 @@ NSString * const kCTAPIBaseManagerRequestID = @"kCTAPIBaseManagerRequestID";
 
 @property (nonatomic, readwrite) CTAPIManagerErrorType errorType;
 @property (nonatomic, strong) NSMutableArray *requestIdList;
+@property (nonatomic, copy) NSDictionary *params;
 
 @property (nonatomic, strong, nullable) void (^successBlock)(CTAPIBaseManager *apimanager);
 @property (nonatomic, strong, nullable) void (^failBlock)(CTAPIBaseManager *apimanager);
@@ -103,8 +104,8 @@ NSString * const kCTAPIBaseManagerRequestID = @"kCTAPIBaseManagerRequestID";
 #pragma mark - calling api
 - (NSInteger)loadData
 {
-    NSDictionary *params = [self.paramSource paramsForApi:self];
-    NSInteger requestId = [self loadDataWithParams:params];
+    self.params = [self.paramSource paramsForApi:self];
+    NSInteger requestId = [self loadDataWithParams:self.params];
     return requestId;
 }
 
@@ -115,10 +116,15 @@ NSString * const kCTAPIBaseManagerRequestID = @"kCTAPIBaseManagerRequestID";
 
 - (NSInteger)loadDataWithParams:(NSDictionary *)params success:(void (^)(CTAPIBaseManager *))successCallback fail:(void (^)(CTAPIBaseManager *))failCallback
 {
+    self.params = params;
     self.successBlock = successCallback;
     self.failBlock = failCallback;
 
     return [self loadDataWithParams:params];
+}
+
+- (NSInteger)reloadData {
+    return [self loadDataWithParams:self.params];
 }
 
 - (NSInteger)loadDataWithParams:(NSDictionary *)params
