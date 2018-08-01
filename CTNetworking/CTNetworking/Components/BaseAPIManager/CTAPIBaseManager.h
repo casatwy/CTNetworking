@@ -34,6 +34,9 @@
 @property (nonatomic, assign, readonly) BOOL isReachable;
 @property (nonatomic, assign, readonly) BOOL isLoading;
 
+// about shut down the logger. Toooo mush noise
+@property(nonatomic,assign) BOOL isOpenLog;
+
 // start
 - (NSInteger)loadData;
 + (NSInteger)loadDataWithParams:(NSDictionary * _Nullable)params success:(void (^ _Nullable)(CTAPIBaseManager * _Nonnull apiManager))successCallback fail:(void (^ _Nullable)(CTAPIBaseManager * _Nonnull apiManager))failCallback;
