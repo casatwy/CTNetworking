@@ -35,7 +35,7 @@
 @property (nonatomic, assign, readonly) BOOL isLoading;
 
 // about shut down the logger. Toooo mush noise
-@property(nonatomic,assign) BOOL isOpenLog;
+@property(nonatomic,assign) BOOL isOpenLogger;
 
 // start
 - (NSInteger)loadData;
