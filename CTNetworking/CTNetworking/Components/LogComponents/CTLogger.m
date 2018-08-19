@@ -28,7 +28,7 @@
 + (NSString *)logDebugInfoWithRequest:(NSURLRequest *)request apiName:(NSString *)apiName service:(id <CTServiceProtocol>)service
 {
     NSMutableString *logString = nil;
-#ifdef DEBUG
+#if (defined(DEBUG) && defined(DEBUG_LOG_REQUEST))
     if ([CTMediator sharedInstance].CTNetworking_shouldPrintNetworkingLog == NO) {
         return @"";
     }
@@ -62,7 +62,7 @@
 + (NSString *)logDebugInfoWithResponse:(NSHTTPURLResponse *)response rawResponseData:(NSData *)rawResponseData responseString:(NSString *)responseString request:(NSURLRequest *)request error:(NSError *)error
 {
     NSMutableString *logString = nil;
-#ifdef DEBUG
+#if (defined(DEBUG) && defined(DEBUG_LOG_RESPONSE))
     if ([CTMediator sharedInstance].CTNetworking_shouldPrintNetworkingLog == NO) {
         return @"";
     }
@@ -93,14 +93,13 @@
  
     NSLog(@"%@", logString);
 #endif
-    
     return logString;
 }
 
 +(NSString *)logDebugInfoWithCachedResponse:(CTURLResponse *)response methodName:(NSString *)methodName service:(id <CTServiceProtocol>)service params:(NSDictionary *)params
 {
     NSMutableString *logString = nil;
-#ifdef DEBUG
+#if (defined(DEBUG) && defined(DEBUG_LOG_CACHERESPONSE))
     if ([CTMediator sharedInstance].CTNetworking_shouldPrintNetworkingLog == NO) {
         return @"";
     }
@@ -118,7 +117,6 @@
     [logString appendFormat:@"\n\n=========================================\nResponse End\n=========================================\n\n"];
     NSLog(@"%@", logString);
 #endif
-    
     return logString;
 }
 
