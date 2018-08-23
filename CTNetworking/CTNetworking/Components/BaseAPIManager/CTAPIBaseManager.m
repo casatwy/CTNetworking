@@ -13,6 +13,7 @@
 #import "CTServiceFactory.h"
 #import "CTApiProxy.h"
 #import "CTMediator+CTAppContext.h"
+#import "CTServiceFactory.h"
 
 NSString * const kCTUserTokenInvalidNotification = @"kCTUserTokenInvalidNotification";
 NSString * const kCTUserTokenIllegalNotification = @"kCTUserTokenIllegalNotification";
@@ -252,32 +253,20 @@ NSString * const kCTAPIBaseManagerRequestID = @"kCTAPIBaseManagerRequestID";
     }
     self.errorType = errorType;
     [self removeRequestIdWithRequestID:response.requestId];
-
-        // user token 无效，重新登录
-        if (errorType == CTAPIManagerErrorTypeNeedLogin) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kCTUserTokenIllegalNotification
-                                                                object:nil
-                                                              userInfo:@{
-                                                                         kCTUserTokenNotificationUserInfoKeyManagerToContinue:self
-                                                                         }];
-            return;
-        }
-
-        NSString *resCode = [NSString stringWithFormat:@"%@", response.content[@"resCode"]];
-        if ([resCode isEqualToString:@"00100009"]
-            || [resCode isEqualToString:@"05111001"]
-            || [resCode isEqualToString:@"05111002"]
-            || [resCode isEqualToString:@"1080002"]
-            ) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kCTUserTokenIllegalNotification
-                                                                object:nil
-                                                              userInfo:@{
-                                                                         kCTUserTokenNotificationUserInfoKeyManagerToContinue:self
-                                                                         }];
-            return;
-        }
+    
+    // 可以自动处理的错误
+    // user token 无效，重新登录
+    if (errorType == CTAPIManagerErrorTypeNeedLogin) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kCTUserTokenIllegalNotification
+                                                            object:nil
+                                                          userInfo:@{
+                                                                     kCTUserTokenNotificationUserInfoKeyManagerToContinue:self
+                                                                     }];
+        return;
+    }
 
     // 可以自动处理的错误
+    // user token 过期，重新刷新
     if (errorType == CTAPIManagerErrorTypeNeedAccessToken) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kCTUserTokenInvalidNotification
                                                             object:nil
@@ -286,18 +275,10 @@ NSString * const kCTAPIBaseManagerRequestID = @"kCTAPIBaseManagerRequestID";
                                                                      }];
         return;
     }
-
-    NSString *errorCode = [NSString stringWithFormat:@"%@", response.content[@"errorCode"]];
-    if ([response.content[@"errorMsg"] isEqualToString:@"invalid token"]
-        || [response.content[@"errorMsg"] isEqualToString:@"access_token is required"]
-        || [errorCode isEqualToString:@"BL10015"]
-        ) {
-        // token 失效
-        [[NSNotificationCenter defaultCenter] postNotificationName:kCTUserTokenInvalidNotification
-                                                            object:nil
-                                                          userInfo:@{
-                                                                     kCTUserTokenNotificationUserInfoKeyManagerToContinue:self
-                                                                     }];
+    
+    id<CTServiceProtocol> service = [[CTServiceFactory sharedInstance] serviceWithIdentifier:self.child.serviceIdentifier];
+    BOOL shouldContinue = [service handleCommonErrorWithResponse:response manager:self errorType:errorType];
+    if (shouldContinue == NO) {
         return;
     }
 

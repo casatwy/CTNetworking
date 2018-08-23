@@ -52,6 +52,40 @@
     return result;
 }
 
+- (BOOL)handleCommonErrorWithResponse:(CTURLResponse *)response manager:(CTAPIBaseManager *)manager errorType:(CTAPIManagerErrorType)errorType
+{
+    // 业务上这些错误码表示需要重新登录
+    NSString *resCode = [NSString stringWithFormat:@"%@", response.content[@"resCode"]];
+    if ([resCode isEqualToString:@"00100009"]
+        || [resCode isEqualToString:@"05111001"]
+        || [resCode isEqualToString:@"05111002"]
+        || [resCode isEqualToString:@"1080002"]
+        ) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kCTUserTokenIllegalNotification
+                                                            object:nil
+                                                          userInfo:@{
+                                                                     kCTUserTokenNotificationUserInfoKeyManagerToContinue:self
+                                                                     }];
+        return NO;
+    }
+    
+    // 业务上这些错误码表示需要刷新token
+    NSString *errorCode = [NSString stringWithFormat:@"%@", response.content[@"errorCode"]];
+    if ([response.content[@"errorMsg"] isEqualToString:@"invalid token"]
+        || [response.content[@"errorMsg"] isEqualToString:@"access_token is required"]
+        || [errorCode isEqualToString:@"BL10015"]
+        ) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kCTUserTokenInvalidNotification
+                                                            object:nil
+                                                          userInfo:@{
+                                                                     kCTUserTokenNotificationUserInfoKeyManagerToContinue:self
+                                                                     }];
+        return NO;
+    }
+    
+    return YES;
+}
+
 #pragma mark - getters and setters
 - (NSString *)publicKey
 {
