@@ -7,11 +7,13 @@
 //
 
 #import <CTMediator/CTMediator.h>
+#import <AFNetworking/AFNetworking.h>
 
 @interface CTMediator (CTAppContext)
 
 - (BOOL)CTNetworking_shouldPrintNetworkingLog;
 - (BOOL)CTNetworking_isReachable;
 - (NSInteger)CTNetworking_cacheResponseCountLimit;
+- (AFSecurityPolicy *)CTNetworking_securityPolicy;
 
 @end

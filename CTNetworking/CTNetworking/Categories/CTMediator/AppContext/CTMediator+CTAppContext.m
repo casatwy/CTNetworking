@@ -25,4 +25,9 @@
     return [[[CTMediator sharedInstance] performTarget:@"CTAppContext" action:@"cacheResponseCountLimit" params:nil shouldCacheTarget:YES] integerValue];
 }
 
+- (AFSecurityPolicy *)CTNetworking_securityPolicy
+{
+    return [[CTMediator sharedInstance] performTarget:@"CTAppContext" action:@"securityPolicy" params:nil shouldCacheTarget:YES];
+}
+
 @end

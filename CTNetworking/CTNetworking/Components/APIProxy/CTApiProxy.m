@@ -13,6 +13,7 @@
 #import "NSURLRequest+CTNetworkingMethods.h"
 #import "NSString+AXNetworkingMethods.h"
 #import "NSObject+AXNetworkingMethods.h"
+#import "CTMediator+CTAppContext.h"
 
 static NSString * const kAXApiProxyDispatchItemKeyCallbackSuccess = @"kAXApiProxyDispatchItemCallbackSuccess";
 static NSString * const kAXApiProxyDispatchItemKeyCallbackFail = @"kAXApiProxyDispatchItemCallbackFail";
@@ -44,8 +45,10 @@ NSString * const kCTApiProxyValidateResultKeyResponseData = @"kCTApiProxyValidat
     if (_sessionManager == nil) {
         _sessionManager = [AFHTTPSessionManager manager];
         _sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
-        _sessionManager.securityPolicy.allowInvalidCertificates = YES;
-        _sessionManager.securityPolicy.validatesDomainName = NO;
+        AFSecurityPolicy *securityPolicy = [CTMediator sharedInstance].CTNetworking_securityPolicy;
+        if (securityPolicy != nil) {
+            _sessionManager.securityPolicy = securityPolicy;
+        }
     }
     return _sessionManager;
 }
