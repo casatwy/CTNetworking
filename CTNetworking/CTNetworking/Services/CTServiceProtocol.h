@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CTNetworkingDefines.h"
+#import <AFNetworking/AFNetworking.h>
 
 @protocol CTServiceProtocol <NSObject>
 
@@ -32,5 +33,8 @@
 - (BOOL)handleCommonErrorWithResponse:(CTURLResponse *)response
                               manager:(CTAPIBaseManager *)manager
                             errorType:(CTAPIManagerErrorType)errorType;
+
+@optional
+- (AFHTTPSessionManager *)sessionManager;
 
 @end

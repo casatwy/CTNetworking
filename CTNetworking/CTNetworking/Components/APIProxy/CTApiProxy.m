@@ -26,7 +26,6 @@ NSString * const kCTApiProxyValidateResultKeyResponseData = @"kCTApiProxyValidat
 
 @property (nonatomic, strong) NSMutableDictionary *dispatchTable;
 @property (nonatomic, strong) NSNumber *recordedRequestId;
-@property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
 
 @end
 
@@ -40,17 +39,16 @@ NSString * const kCTApiProxyValidateResultKeyResponseData = @"kCTApiProxyValidat
     return _dispatchTable;
 }
 
-- (AFHTTPSessionManager *)sessionManager
+- (AFHTTPSessionManager *)sessionManagerWithService:(id<CTServiceProtocol>)service
 {
-    if (_sessionManager == nil) {
-        _sessionManager = [AFHTTPSessionManager manager];
-        _sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
-        AFSecurityPolicy *securityPolicy = [CTMediator sharedInstance].CTNetworking_securityPolicy;
-        if (securityPolicy != nil) {
-            _sessionManager.securityPolicy = securityPolicy;
-        }
+    AFHTTPSessionManager *sessionManager = nil;
+    if ([service respondsToSelector:@selector(sessionManager)]) {
+        sessionManager = service.sessionManager;
     }
-    return _sessionManager;
+    if (sessionManager == nil) {
+        sessionManager = [AFHTTPSessionManager manager];
+    }
+    return sessionManager;
 }
 
 #pragma mark - life cycle
@@ -84,7 +82,7 @@ NSString * const kCTApiProxyValidateResultKeyResponseData = @"kCTApiProxyValidat
 {
     // 跑到这里的block的时候，就已经是主线程了。
     __block NSURLSessionDataTask *dataTask = nil;
-    dataTask = [self.sessionManager dataTaskWithRequest:request
+    dataTask = [[self sessionManagerWithService:request.service] dataTaskWithRequest:request
                                          uploadProgress:nil
                                        downloadProgress:nil
                                       completionHandler:^(NSURLResponse * _Nonnull response, NSData * _Nullable responseData, NSError * _Nullable error) {
