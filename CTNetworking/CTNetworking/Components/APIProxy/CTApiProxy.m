@@ -86,6 +86,9 @@ NSString * const kCTApiProxyValidateResultKeyResponseData = @"kCTApiProxyValidat
                                          uploadProgress:nil
                                        downloadProgress:nil
                                       completionHandler:^(NSURLResponse * _Nonnull response, NSData * _Nullable responseData, NSError * _Nullable error) {
+                                          if (responseData && ![responseData isKindOfClass:[NSData class]]) {
+                                              responseData = [NSJSONSerialization dataWithJSONObject:responseData options:NSJSONWritingPrettyPrinted error:nil];
+                                          }
         NSNumber *requestID = @([dataTask taskIdentifier]);
         [self.dispatchTable removeObjectForKey:requestID];
         
