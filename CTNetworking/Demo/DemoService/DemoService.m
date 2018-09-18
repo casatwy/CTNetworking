@@ -46,9 +46,19 @@
 - (NSDictionary *)resultWithResponseData:(NSData *)responseData response:(NSURLResponse *)response request:(NSURLRequest *)request error:(NSError **)error
 {
     NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
+    if (responseData == nil) {
+        return result;
+    }
+    
     result[kCTApiProxyValidateResultKeyResponseData] = responseData;
-    result[kCTApiProxyValidateResultKeyResponseJSONString] = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-    result[kCTApiProxyValidateResultKeyResponseJSONObject] = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:NULL];
+    if ([responseData isKindOfClass:[NSData class]]) {
+        result[kCTApiProxyValidateResultKeyResponseJSONString] = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+        result[kCTApiProxyValidateResultKeyResponseJSONObject] = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:NULL];
+    } else {
+        result[kCTApiProxyValidateResultKeyResponseJSONString] = responseData;
+        result[kCTApiProxyValidateResultKeyResponseJSONObject] = responseData;
+    }
+    
     return result;
 }
 
