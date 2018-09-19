@@ -43,20 +43,20 @@
     return nil;
 }
 
-- (NSDictionary *)resultWithResponseData:(NSData *)responseData response:(NSURLResponse *)response request:(NSURLRequest *)request error:(NSError **)error
+- (NSDictionary *)resultWithResponseObject:(id)responseObject response:(NSURLResponse *)response request:(NSURLRequest *)request error:(NSError **)error
 {
     NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
-    if (responseData == nil) {
+    if (error || !responseObject) {
         return result;
     }
     
-    result[kCTApiProxyValidateResultKeyResponseData] = responseData;
-    if ([responseData isKindOfClass:[NSData class]]) {
-        result[kCTApiProxyValidateResultKeyResponseJSONString] = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-        result[kCTApiProxyValidateResultKeyResponseJSONObject] = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:NULL];
+    if ([responseObject isKindOfClass:[NSData class]]) {
+        result[kCTApiProxyValidateResultKeyResponseString] = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        result[kCTApiProxyValidateResultKeyResponseObject] = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:NULL];
     } else {
-        result[kCTApiProxyValidateResultKeyResponseJSONString] = responseData;
-        result[kCTApiProxyValidateResultKeyResponseJSONObject] = responseData;
+        //这里的kCTApiProxyValidateResultKeyResponseString是用作打印日志用的，实际使用时可以把实际类型的对象转换成string用于日志打印
+//        result[kCTApiProxyValidateResultKeyResponseString] = responseObject;
+        result[kCTApiProxyValidateResultKeyResponseObject] = responseObject;
     }
     
     return result;

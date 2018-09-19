@@ -63,8 +63,8 @@ NSString * const kCTOriginActionCallbackKeyProgress = @"progress";
     if (successCallback) {
         NSMutableDictionary *fetchedData = [manager fetchDataWithReformer:nil];
         if ([fetchedData isKindOfClass:[NSMutableDictionary class]]) {
-            [fetchedData removeObjectForKey:kCTApiProxyValidateResultKeyResponseJSONString];
-            [fetchedData removeObjectForKey:kCTApiProxyValidateResultKeyResponseData];
+            [fetchedData removeObjectForKey:kCTApiProxyValidateResultKeyResponseString];
+//            [fetchedData removeObjectForKey:kCTApiProxyValidateResultKeyResponseData];
         }
         successCallback(fetchedData);
     }

@@ -56,9 +56,9 @@ extern NSString * _Nonnull const kCTUserTokenIllegalNotification;
 extern NSString * _Nonnull const kCTUserTokenNotificationUserInfoKeyManagerToContinue;
 
 // result
-extern NSString * _Nonnull const kCTApiProxyValidateResultKeyResponseJSONObject;
-extern NSString * _Nonnull const kCTApiProxyValidateResultKeyResponseJSONString;
-extern NSString * _Nonnull const kCTApiProxyValidateResultKeyResponseData;
+extern NSString * _Nonnull const kCTApiProxyValidateResultKeyResponseObject;
+extern NSString * _Nonnull const kCTApiProxyValidateResultKeyResponseString;
+//extern NSString * _Nonnull const kCTApiProxyValidateResultKeyResponseData;
 
 /*************************************************************************************/
 @protocol CTAPIManager <NSObject>

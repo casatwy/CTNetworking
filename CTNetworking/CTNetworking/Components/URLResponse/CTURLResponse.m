@@ -26,7 +26,7 @@
 @implementation CTURLResponse
 
 #pragma mark - life cycle
-- (instancetype)initWithResponseString:(NSString *)responseString requestId:(NSNumber *)requestId request:(NSURLRequest *)request responseContent:(NSDictionary *)responseContent error:(NSError *)error
+- (instancetype)initWithResponseString:(NSString *)responseString requestId:(NSNumber *)requestId request:(NSURLRequest *)request responseObject:(NSDictionary *)responseObject error:(NSError *)error
 {
     self = [super init];
     if (self) {
@@ -37,7 +37,7 @@
         self.originRequestParams = request.originRequestParams;
         self.isCache = NO;
         self.status = [self responseStatusWithError:error];
-        self.content = responseContent ? responseContent : @{};
+        self.content = responseObject ? responseObject : @{};
         self.errorMessage = [NSString stringWithFormat:@"%@", error];
     }
     return self;
