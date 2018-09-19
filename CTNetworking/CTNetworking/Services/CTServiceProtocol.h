@@ -18,7 +18,7 @@
                          methodName:(NSString *)methodName
                         requestType:(CTAPIManagerRequestType)requestType;
 
-- (NSDictionary *)resultWithResponseData:(NSData *)responseData
+- (NSDictionary *)resultWithResponseObject:(id)responseObject
                                 response:(NSURLResponse *)response
                                  request:(NSURLRequest *)request
                                    error:(NSError **)error;

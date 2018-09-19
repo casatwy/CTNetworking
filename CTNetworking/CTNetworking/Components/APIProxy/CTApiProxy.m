@@ -18,9 +18,9 @@
 static NSString * const kAXApiProxyDispatchItemKeyCallbackSuccess = @"kAXApiProxyDispatchItemCallbackSuccess";
 static NSString * const kAXApiProxyDispatchItemKeyCallbackFail = @"kAXApiProxyDispatchItemCallbackFail";
 
-NSString * const kCTApiProxyValidateResultKeyResponseJSONObject = @"kCTApiProxyValidateResultKeyResponseJSONObject";
-NSString * const kCTApiProxyValidateResultKeyResponseJSONString = @"kCTApiProxyValidateResultKeyResponseJSONString";
-NSString * const kCTApiProxyValidateResultKeyResponseData = @"kCTApiProxyValidateResultKeyResponseData";
+NSString * const kCTApiProxyValidateResultKeyResponseObject = @"kCTApiProxyValidateResultKeyResponseObject";
+NSString * const kCTApiProxyValidateResultKeyResponseString = @"kCTApiProxyValidateResultKeyResponseString";
+//NSString * const kCTApiProxyValidateResultKeyResponseData = @"kCTApiProxyValidateResultKeyResponseData";
 
 @interface CTApiProxy ()
 
@@ -85,21 +85,21 @@ NSString * const kCTApiProxyValidateResultKeyResponseData = @"kCTApiProxyValidat
     dataTask = [[self sessionManagerWithService:request.service] dataTaskWithRequest:request
                                          uploadProgress:nil
                                        downloadProgress:nil
-                                      completionHandler:^(NSURLResponse * _Nonnull response, NSData * _Nullable responseData, NSError * _Nullable error) {
+                                      completionHandler:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
         NSNumber *requestID = @([dataTask taskIdentifier]);
         [self.dispatchTable removeObjectForKey:requestID];
         
-        NSDictionary *result = [request.service resultWithResponseData:responseData response:response request:request error:&error];
+        NSDictionary *result = [request.service resultWithResponseObject:responseObject response:response request:request error:&error];
         // 输出返回数据
-        CTURLResponse *CTResponse = [[CTURLResponse alloc] initWithResponseString:result[kCTApiProxyValidateResultKeyResponseJSONString]
+        CTURLResponse *CTResponse = [[CTURLResponse alloc] initWithResponseString:result[kCTApiProxyValidateResultKeyResponseString]
                                                                         requestId:requestID
                                                                           request:request
-                                                                  responseContent:result[kCTApiProxyValidateResultKeyResponseJSONObject]
+                                                                  responseObject:result[kCTApiProxyValidateResultKeyResponseObject]
                                                                             error:error];
 
         CTResponse.logString = [CTLogger logDebugInfoWithResponse:(NSHTTPURLResponse *)response
-                                                  rawResponseData:responseData
-                                                   responseString:result[kCTApiProxyValidateResultKeyResponseJSONString]
+                                                   responseObject:responseObject
+                                                   responseString:result[kCTApiProxyValidateResultKeyResponseString]
                                                           request:request
                                                             error:error];
 

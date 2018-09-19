@@ -59,7 +59,7 @@
     return logString;
 }
 
-+ (NSString *)logDebugInfoWithResponse:(NSHTTPURLResponse *)response rawResponseData:(NSData *)rawResponseData responseString:(NSString *)responseString request:(NSURLRequest *)request error:(NSError *)error
++ (NSString *)logDebugInfoWithResponse:(NSHTTPURLResponse *)response responseObject:(id)responseObject responseString:(NSString *)responseString request:(NSURLRequest *)request error:(NSError *)error
 {
     NSMutableString *logString = nil;
 #ifdef DEBUG
@@ -75,7 +75,11 @@
     [logString appendFormat:@"Content:\n\t%@\n\n", responseString];
     [logString appendFormat:@"Request URL:\n\t%@\n\n", request.URL];
     [logString appendFormat:@"Request Data:\n\t%@\n\n",request.originRequestParams.CT_jsonString];
-    [logString appendFormat:@"Raw Response String:\n\t%@\n\n", [[NSString alloc] initWithData:rawResponseData encoding:NSUTF8StringEncoding]];
+    if ([responseObject isKindOfClass:[NSData class]]) {
+        [logString appendFormat:@"Raw Response String:\n\t%@\n\n", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]];
+    } else {
+        [logString appendFormat:@"Raw Response String:\n\t%@\n\n", responseObject];
+    }
     [logString appendFormat:@"Raw Response Header:\n\t%@\n\n", response.allHeaderFields];
     if (isSuccess == NO) {
         [logString appendFormat:@"Error Domain:\t\t\t\t\t\t\t%@\n", error.domain];
