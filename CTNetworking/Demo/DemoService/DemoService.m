@@ -46,7 +46,7 @@
 - (NSDictionary *)resultWithResponseObject:(id)responseObject response:(NSURLResponse *)response request:(NSURLRequest *)request error:(NSError **)error
 {
     NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
-    if (error || !responseObject) {
+    if (*error || !responseObject) {
         return result;
     }
     
