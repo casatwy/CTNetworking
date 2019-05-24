@@ -3,7 +3,7 @@ pod "CTNetworking"
 
 replacement for [RTNetworking](https://github.com/casatwy/RTNetworking)
 
-Related Projects
+DEMO Projects
 ----------------
 
 [CTAPI_AMap](https://github.com/CTAPIs/CTAPI_AMap)
