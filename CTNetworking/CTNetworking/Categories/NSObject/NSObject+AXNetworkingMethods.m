@@ -12,8 +12,17 @@
 
 - (id)CT_defaultValue:(id)defaultData
 {
-    if (![defaultData isKindOfClass:[self class]]) {
+    BOOL shouldContinue = NO;
+    if ([self isKindOfClass:[NSString class]] || [self isKindOfClass:NSClassFromString(@"NSTaggedPointerString")] || [self isKindOfClass:NSClassFromString(@"__NSCFConstantString")]) {
+        if ([defaultData isKindOfClass:[NSString class]] || [defaultData isKindOfClass:NSClassFromString(@"NSTaggedPointerString")] || [defaultData isKindOfClass:NSClassFromString(@"__NSCFConstantString")]) {
+            shouldContinue = YES;
+        }
+    } else if (![defaultData isMemberOfClass:[self class]]) {
         return defaultData;
+    }
+    
+    if (shouldContinue == NO) {
+        return [NSString stringWithFormat:@"%@", defaultData];
     }
     
     if ([self CT_isEmptyObject]) {
