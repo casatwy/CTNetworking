@@ -25,7 +25,7 @@ NSString * const kCTApiProxyValidateResultKeyResponseString = @"kCTApiProxyValid
 @interface CTApiProxy ()
 
 @property (nonatomic, strong) NSMutableDictionary *dispatchTable;
-@property (nonatomic, strong) NSNumber *recordedRequestId;
+//@property (nonatomic, strong) NSNumber *recordedRequestId;
 
 @end
 
@@ -51,6 +51,12 @@ NSString * const kCTApiProxyValidateResultKeyResponseString = @"kCTApiProxyValid
     return sessionManager;
 }
 
+- (NSString *)requestIDWithService:(id<CTServiceProtocol>)service dataTask:(NSURLSessionDataTask *)dataTask {
+    NSString *requestId = [NSString stringWithFormat:@"%@-%ld", NSStringFromClass(service.class), [dataTask taskIdentifier]];
+    
+    return requestId;
+}
+
 #pragma mark - life cycle
 + (instancetype)sharedInstance
 {
@@ -63,7 +69,7 @@ NSString * const kCTApiProxyValidateResultKeyResponseString = @"kCTApiProxyValid
 }
 
 #pragma mark - public methods
-- (void)cancelRequestWithRequestID:(NSNumber *)requestID
+- (void)cancelRequestWithRequestID:(NSString *)requestID
 {
     NSURLSessionDataTask *requestOperation = self.dispatchTable[requestID];
     [requestOperation cancel];
@@ -72,21 +78,21 @@ NSString * const kCTApiProxyValidateResultKeyResponseString = @"kCTApiProxyValid
 
 - (void)cancelRequestWithRequestIDList:(NSArray *)requestIDList
 {
-    for (NSNumber *requestId in requestIDList) {
+    for (NSString *requestId in requestIDList) {
         [self cancelRequestWithRequestID:requestId];
     }
 }
 
 /** 这个函数存在的意义在于，如果将来要把AFNetworking换掉，只要修改这个函数的实现即可。 */
-- (NSNumber *)callApiWithRequest:(NSURLRequest *)request success:(CTCallback)success fail:(CTCallback)fail
+- (NSString *)callApiWithRequest:(NSURLRequest *)request success:(CTCallback)success fail:(CTCallback)fail
 {
     // 跑到这里的block的时候，就已经是主线程了。
     __block NSURLSessionDataTask *dataTask = nil;
     dataTask = [[self sessionManagerWithService:request.service] dataTaskWithRequest:request
-                                         uploadProgress:nil
-                                       downloadProgress:nil
-                                      completionHandler:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
-        NSNumber *requestID = @([dataTask taskIdentifier]);
+                                                                      uploadProgress:nil
+                                                                    downloadProgress:nil
+                                                                   completionHandler:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
+        NSString *requestID = [self requestIDWithService:request.service dataTask:dataTask];
         [self.dispatchTable removeObjectForKey:requestID];
         
         NSDictionary *result = [request.service resultWithResponseObject:responseObject response:response request:request error:&error];
@@ -110,7 +116,7 @@ NSString * const kCTApiProxyValidateResultKeyResponseString = @"kCTApiProxyValid
         }
     }];
 
-    NSNumber *requestId = @([dataTask taskIdentifier]);
+    NSString *requestId = [self requestIDWithService:request.service dataTask:dataTask];
     
     self.dispatchTable[requestId] = dataTask;
     [dataTask resume];

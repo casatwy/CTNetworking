@@ -84,10 +84,10 @@ NSString * const kCTAPIBaseManagerRequestID = @"kCTAPIBaseManagerRequestID";
     [self.requestIdList removeAllObjects];
 }
 
-- (void)cancelRequestWithRequestId:(NSInteger)requestID
+- (void)cancelRequestWithRequestId:(NSString *)requestID
 {
     [self removeRequestIdWithRequestID:requestID];
-    [[CTApiProxy sharedInstance] cancelRequestWithRequestID:@(requestID)];
+    [[CTApiProxy sharedInstance] cancelRequestWithRequestID:requestID];
 }
 
 - (id)fetchDataWithReformer:(id<CTAPIManagerDataReformer>)reformer
@@ -102,19 +102,19 @@ NSString * const kCTAPIBaseManagerRequestID = @"kCTAPIBaseManagerRequestID";
 }
 
 #pragma mark - calling api
-- (NSInteger)loadData
+- (NSString *)loadData
 {
     NSDictionary *params = [self.paramSource paramsForApi:self];
-    NSInteger requestId = [self loadDataWithParams:params];
+    NSString *requestId = [self loadDataWithParams:params];
     return requestId;
 }
 
-+ (NSInteger)loadDataWithParams:(NSDictionary *)params success:(void (^)(CTAPIBaseManager *))successCallback fail:(void (^)(CTAPIBaseManager *))failCallback
++ (NSString *)loadDataWithParams:(NSDictionary *)params success:(void (^)(CTAPIBaseManager *))successCallback fail:(void (^)(CTAPIBaseManager *))failCallback
 {
     return [[[self alloc] init] loadDataWithParams:params success:successCallback fail:failCallback];
 }
 
-- (NSInteger)loadDataWithParams:(NSDictionary *)params success:(void (^)(CTAPIBaseManager *))successCallback fail:(void (^)(CTAPIBaseManager *))failCallback
+- (NSString *)loadDataWithParams:(NSDictionary *)params success:(void (^)(CTAPIBaseManager *))successCallback fail:(void (^)(CTAPIBaseManager *))failCallback
 {
     self.successBlock = successCallback;
     self.failBlock = failCallback;
@@ -122,9 +122,9 @@ NSString * const kCTAPIBaseManagerRequestID = @"kCTAPIBaseManagerRequestID";
     return [self loadDataWithParams:params];
 }
 
-- (NSInteger)loadDataWithParams:(NSDictionary *)params
+- (NSString *)loadDataWithParams:(NSDictionary *)params
 {
-    NSInteger requestId = 0;
+    NSString *requestId = @"";
     NSDictionary *reformedParams = [self reformParams:params];
     if (reformedParams == nil) {
         reformedParams = @{};
@@ -158,7 +158,7 @@ NSString * const kCTAPIBaseManagerRequestID = @"kCTAPIBaseManagerRequestID";
                 request.service = service;
                 [CTLogger logDebugInfoWithRequest:request apiName:self.child.methodName service:service];
                 
-                NSNumber *requestId = [[CTApiProxy sharedInstance] callApiWithRequest:request success:^(CTURLResponse *response) {
+                NSString *requestId = [[CTApiProxy sharedInstance] callApiWithRequest:request success:^(CTURLResponse *response) {
                     [self successedOnCallingAPI:response];
                 } fail:^(CTURLResponse *response) {
                     CTAPIManagerErrorType errorType = CTAPIManagerErrorTypeDefault;
@@ -178,7 +178,7 @@ NSString * const kCTAPIBaseManagerRequestID = @"kCTAPIBaseManagerRequestID";
                 NSMutableDictionary *params = [reformedParams mutableCopy];
                 params[kCTAPIBaseManagerRequestID] = requestId;
                 [self afterCallingAPIWithParams:params];
-                return [requestId integerValue];
+                return requestId;
             
             } else {
                 [self failedOnCallingAPI:nil withErrorType:CTAPIManagerErrorTypeNoNetWork];
@@ -405,11 +405,11 @@ NSString * const kCTAPIBaseManagerRequestID = @"kCTAPIBaseManagerRequestID";
 }
 
 #pragma mark - private methods
-- (void)removeRequestIdWithRequestID:(NSInteger)requestId
+- (void)removeRequestIdWithRequestID:(NSString *)requestId
 {
-    NSNumber *requestIDToRemove = nil;
-    for (NSNumber *storedRequestId in self.requestIdList) {
-        if ([storedRequestId integerValue] == requestId) {
+    NSString *requestIDToRemove = nil;
+    for (NSString *storedRequestId in self.requestIdList) {
+        if ([storedRequestId isEqualToString:requestId]) {
             requestIDToRemove = storedRequestId;
         }
     }

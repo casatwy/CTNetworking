@@ -16,7 +16,7 @@
 @property (nonatomic, copy, readwrite) NSString *contentString;
 @property (nonatomic, copy, readwrite) id content;
 @property (nonatomic, copy, readwrite) NSURLRequest *request;
-@property (nonatomic, assign, readwrite) NSInteger requestId;
+@property (nonatomic, copy, readwrite) NSString *requestId;
 @property (nonatomic, copy, readwrite) NSData *responseData;
 @property (nonatomic, assign, readwrite) BOOL isCache;
 @property (nonatomic, strong, readwrite) NSString *errorMessage;
@@ -26,12 +26,12 @@
 @implementation CTURLResponse
 
 #pragma mark - life cycle
-- (instancetype)initWithResponseString:(NSString *)responseString requestId:(NSNumber *)requestId request:(NSURLRequest *)request responseObject:(NSDictionary *)responseObject error:(NSError *)error
+- (instancetype)initWithResponseString:(NSString *)responseString requestId:(NSString *)requestId request:(NSURLRequest *)request responseObject:(NSDictionary *)responseObject error:(NSError *)error
 {
     self = [super init];
     if (self) {
         self.contentString = [responseString CT_defaultValue:@""];
-        self.requestId = [requestId integerValue];
+        self.requestId = requestId;
         self.request = request;
         self.acturlRequestParams = request.actualRequestParams;
         self.originRequestParams = request.originRequestParams;
@@ -49,7 +49,7 @@
     if (self) {
         self.contentString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         self.status = [self responseStatusWithError:nil];
-        self.requestId = 0;
+        self.requestId = @"";
         self.request = nil;
         self.responseData = data;
         self.content = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:NULL];

@@ -21,7 +21,7 @@ typedef NS_ENUM(NSUInteger, CTURLResponseStatus)
 @property (nonatomic, assign, readonly) CTURLResponseStatus status;
 @property (nonatomic, copy, readonly) NSString *contentString;
 @property (nonatomic, copy, readonly) id content;
-@property (nonatomic, assign, readonly) NSInteger requestId;
+@property (nonatomic, copy, readonly) NSString *requestId;
 @property (nonatomic, copy, readonly) NSURLRequest *request;
 @property (nonatomic, copy, readonly) NSData *responseData;
 @property (nonatomic, strong, readonly) NSString *errorMessage;
@@ -32,7 +32,7 @@ typedef NS_ENUM(NSUInteger, CTURLResponseStatus)
 
 @property (nonatomic, assign, readonly) BOOL isCache;
 
-- (instancetype)initWithResponseString:(NSString *)responseString requestId:(NSNumber *)requestId request:(NSURLRequest *)request responseObject:(id)responseObject error:(NSError *)error;
+- (instancetype)initWithResponseString:(NSString *)responseString requestId:(NSString *)requestId request:(NSURLRequest *)request responseObject:(id)responseObject error:(NSError *)error;
 
 // 使用initWithData的response，它的isCache是YES，上面两个函数生成的response的isCache是NO
 - (instancetype)initWithData:(NSData *)data;
