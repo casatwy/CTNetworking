@@ -14,6 +14,7 @@
 #import "NSString+AXNetworkingMethods.h"
 #import "NSObject+AXNetworkingMethods.h"
 #import "CTMediator+CTAppContext.h"
+#import <pthread/pthread.h>
 
 static NSString * const kAXApiProxyDispatchItemKeyCallbackSuccess = @"kAXApiProxyDispatchItemCallbackSuccess";
 static NSString * const kAXApiProxyDispatchItemKeyCallbackFail = @"kAXApiProxyDispatchItemCallbackFail";
@@ -23,6 +24,9 @@ NSString * const kCTApiProxyValidateResultKeyResponseString = @"kCTApiProxyValid
 //NSString * const kCTApiProxyValidateResultKeyResponseData = @"kCTApiProxyValidateResultKeyResponseData";
 
 @interface CTApiProxy ()
+{
+    pthread_rwlock_t _dispatchTableLock;
+}
 
 @property (nonatomic, strong) NSMutableDictionary *dispatchTable;
 //@property (nonatomic, strong) NSNumber *recordedRequestId;
@@ -30,6 +34,16 @@ NSString * const kCTApiProxyValidateResultKeyResponseString = @"kCTApiProxyValid
 @end
 
 @implementation CTApiProxy
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        pthread_rwlock_init(&_dispatchTableLock, NULL);
+    }
+    return self;
+}
+
 #pragma mark - getters and setters
 - (NSMutableDictionary *)dispatchTable
 {
@@ -71,9 +85,11 @@ NSString * const kCTApiProxyValidateResultKeyResponseString = @"kCTApiProxyValid
 #pragma mark - public methods
 - (void)cancelRequestWithRequestID:(NSString *)requestID
 {
+    pthread_rwlock_wrlock(&_dispatchTableLock);
     NSURLSessionDataTask *requestOperation = self.dispatchTable[requestID];
     [requestOperation cancel];
     [self.dispatchTable removeObjectForKey:requestID];
+    pthread_rwlock_unlock(&_dispatchTableLock);
 }
 
 - (void)cancelRequestWithRequestIDList:(NSArray *)requestIDList
@@ -93,7 +109,9 @@ NSString * const kCTApiProxyValidateResultKeyResponseString = @"kCTApiProxyValid
                                                                     downloadProgress:nil
                                                                    completionHandler:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
         NSString *requestID = [self requestIDWithService:request.service dataTask:dataTask];
+        pthread_rwlock_wrlock(&_dispatchTableLock);
         [self.dispatchTable removeObjectForKey:requestID];
+        pthread_rwlock_unlock(&_dispatchTableLock);
         
         NSDictionary *result = [request.service resultWithResponseObject:responseObject response:response request:request error:&error];
         // 输出返回数据
@@ -118,7 +136,10 @@ NSString * const kCTApiProxyValidateResultKeyResponseString = @"kCTApiProxyValid
 
     NSString *requestId = [self requestIDWithService:request.service dataTask:dataTask];
     
+    pthread_rwlock_wrlock(&_dispatchTableLock);
     self.dispatchTable[requestId] = dataTask;
+    pthread_rwlock_unlock(&_dispatchTableLock);
+
     [dataTask resume];
     
     return requestId;
