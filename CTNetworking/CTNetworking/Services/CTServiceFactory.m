@@ -20,13 +20,13 @@
 @implementation CTServiceFactory
 
 #pragma mark - getters and setters
-- (NSMutableDictionary *)serviceStorage
-{
-    if (_serviceStorage == nil) {
-        _serviceStorage = [[NSMutableDictionary alloc] init];
-    }
-    return _serviceStorage;
-}
+//- (NSMutableDictionary *)serviceStorage
+//{
+//    if (_serviceStorage == nil) {
+//        _serviceStorage = [[NSMutableDictionary alloc] init];
+//    }
+//    return _serviceStorage;
+//}
 
 #pragma mark - life cycle
 + (instancetype)sharedInstance
@@ -39,12 +39,25 @@
     return sharedInstance;
 }
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        // 防止出现并发问题，不再使用懒加载方式初始化
+        _serviceStorage = [[NSMutableDictionary alloc] init];
+    }
+    
+    return self;
+}
+
 #pragma mark - public methods
 - (id <CTServiceProtocol>)serviceWithIdentifier:(NSString *)identifier
 {
-    if (self.serviceStorage[identifier] == nil) {
-        self.serviceStorage[identifier] = [self newServiceWithIdentifier:identifier];
+    @synchronized (self.serviceStorage) {
+        if (self.serviceStorage[identifier] == nil) {
+            self.serviceStorage[identifier] = [self newServiceWithIdentifier:identifier];
+        }
     }
+    
     return self.serviceStorage[identifier];
 }
 
