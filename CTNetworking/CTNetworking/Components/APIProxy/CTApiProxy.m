@@ -83,6 +83,21 @@ NSString * const kCTApiProxyValidateResultKeyResponseString = @"kCTApiProxyValid
 }
 
 #pragma mark - public methods
+
+- (void)cancelAllRequests
+{
+    pthread_rwlock_wrlock(&_dispatchTableLock);
+    
+    [self.dispatchTable enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key,
+                                                            NSURLSessionDataTask * _Nonnull obj,
+                                                            BOOL * _Nonnull stop) {
+        [obj cancel];
+    }];
+    [self.dispatchTable removeAllObjects];
+    
+    pthread_rwlock_unlock(&_dispatchTableLock);
+}
+
 - (void)cancelRequestWithRequestID:(NSString *)requestID
 {
     pthread_rwlock_wrlock(&_dispatchTableLock);

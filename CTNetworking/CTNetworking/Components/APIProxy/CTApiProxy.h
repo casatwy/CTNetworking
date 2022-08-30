@@ -20,4 +20,6 @@ typedef void(^CTCallback)(CTURLResponse *response);
 - (void)cancelRequestWithRequestID:(NSString *)requestID;
 - (void)cancelRequestWithRequestIDList:(NSArray *)requestIDList;
 
+- (void)cancelAllRequests;
+
 @end
