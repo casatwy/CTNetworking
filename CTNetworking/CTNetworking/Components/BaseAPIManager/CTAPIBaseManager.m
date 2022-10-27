@@ -407,6 +407,10 @@ NSString * const kCTAPIBaseManagerRequestID = @"kCTAPIBaseManagerRequestID";
 #pragma mark - private methods
 - (void)removeRequestIdWithRequestID:(NSString *)requestId
 {
+    if (![requestId isKindOfClass:[NSString class]]) {
+        return;
+    }
+    
     NSString *requestIDToRemove = nil;
     for (NSString *storedRequestId in self.requestIdList) {
         if ([storedRequestId isEqualToString:requestId]) {
