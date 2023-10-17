@@ -44,6 +44,10 @@ NSString * const kCTApiProxyValidateResultKeyResponseString = @"kCTApiProxyValid
     return self;
 }
 
+- (void)dealloc {
+    pthread_rwlock_destroy(&_dispatchTableLock);
+}
+
 #pragma mark - getters and setters
 - (NSMutableDictionary *)dispatchTable
 {

@@ -77,6 +77,8 @@ NSString * const kCTAPIBaseManagerRequestID = @"kCTAPIBaseManagerRequestID";
 {
     [self cancelAllRequests];
     _requestIdList = nil;
+    
+    pthread_rwlock_destroy(&_requestIdListLock);
 }
 
 #pragma mark - NSCopying
