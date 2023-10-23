@@ -35,12 +35,13 @@
 @property (nonatomic, assign, readonly) BOOL isLoading;
 
 // start
-- (NSInteger)loadData;
-+ (NSInteger)loadDataWithParams:(NSDictionary * _Nullable)params success:(void (^ _Nullable)(CTAPIBaseManager * _Nonnull apiManager))successCallback fail:(void (^ _Nullable)(CTAPIBaseManager * _Nonnull apiManager))failCallback;
+- (NSString *_Nonnull)loadData;
+- (NSString *_Nonnull)loadDataWithParams:(NSDictionary * _Nullable)params success:(void (^ _Nullable)(CTAPIBaseManager * _Nonnull apiManager))successCallback fail:(void (^ _Nullable)(CTAPIBaseManager * _Nonnull apiManager))failCallback;
++ (NSString *_Nonnull)loadDataWithParams:(NSDictionary * _Nullable)params success:(void (^ _Nullable)(CTAPIBaseManager * _Nonnull apiManager))successCallback fail:(void (^ _Nullable)(CTAPIBaseManager * _Nonnull apiManager))failCallback;
 
 // cancel
 - (void)cancelAllRequests;
-- (void)cancelRequestWithRequestId:(NSInteger)requestID;
+- (void)cancelRequestWithRequestId:(NSString *_Nonnull)requestID;
 
 // finish
 - (id _Nullable )fetchDataWithReformer:(id <CTAPIManagerDataReformer> _Nullable)reformer;

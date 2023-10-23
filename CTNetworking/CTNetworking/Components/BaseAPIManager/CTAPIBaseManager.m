@@ -15,6 +15,9 @@
 #import "CTMediator+CTAppContext.h"
 #import "CTServiceFactory.h"
 
+#import <pthread/pthread.h>
+
+
 NSString * const kCTUserTokenInvalidNotification = @"kCTUserTokenInvalidNotification";
 NSString * const kCTUserTokenIllegalNotification = @"kCTUserTokenIllegalNotification";
 
@@ -23,6 +26,9 @@ NSString * const kCTAPIBaseManagerRequestID = @"kCTAPIBaseManagerRequestID";
 
 
 @interface CTAPIBaseManager ()
+{
+    pthread_rwlock_t _requestIdListLock;
+}
 
 @property (nonatomic, strong, readwrite) id fetchedRawData;
 @property (nonatomic, assign, readwrite) BOOL isLoading;
@@ -55,6 +61,8 @@ NSString * const kCTAPIBaseManagerRequestID = @"kCTAPIBaseManagerRequestID";
         _memoryCacheSecond = 3 * 60;
         _diskCacheSecond = 3 * 60;
         
+        pthread_rwlock_init(&_requestIdListLock, NULL);
+
         if ([self conformsToProtocol:@protocol(CTAPIManager)]) {
             self.child = (id <CTAPIManager>)self;
         } else {
@@ -68,7 +76,9 @@ NSString * const kCTAPIBaseManagerRequestID = @"kCTAPIBaseManagerRequestID";
 - (void)dealloc
 {
     [self cancelAllRequests];
-    self.requestIdList = nil;
+    _requestIdList = nil;
+    
+    pthread_rwlock_destroy(&_requestIdListLock);
 }
 
 #pragma mark - NSCopying
@@ -81,13 +91,16 @@ NSString * const kCTAPIBaseManagerRequestID = @"kCTAPIBaseManagerRequestID";
 - (void)cancelAllRequests
 {
     [[CTApiProxy sharedInstance] cancelRequestWithRequestIDList:self.requestIdList];
+    
+    pthread_rwlock_wrlock(&_requestIdListLock);
     [self.requestIdList removeAllObjects];
+    pthread_rwlock_unlock(&_requestIdListLock);
 }
 
-- (void)cancelRequestWithRequestId:(NSInteger)requestID
+- (void)cancelRequestWithRequestId:(NSString *)requestID
 {
     [self removeRequestIdWithRequestID:requestID];
-    [[CTApiProxy sharedInstance] cancelRequestWithRequestID:@(requestID)];
+    [[CTApiProxy sharedInstance] cancelRequestWithRequestID:requestID];
 }
 
 - (id)fetchDataWithReformer:(id<CTAPIManagerDataReformer>)reformer
@@ -102,19 +115,19 @@ NSString * const kCTAPIBaseManagerRequestID = @"kCTAPIBaseManagerRequestID";
 }
 
 #pragma mark - calling api
-- (NSInteger)loadData
+- (NSString *)loadData
 {
     NSDictionary *params = [self.paramSource paramsForApi:self];
-    NSInteger requestId = [self loadDataWithParams:params];
+    NSString *requestId = [self loadDataWithParams:params];
     return requestId;
 }
 
-+ (NSInteger)loadDataWithParams:(NSDictionary *)params success:(void (^)(CTAPIBaseManager *))successCallback fail:(void (^)(CTAPIBaseManager *))failCallback
++ (NSString *)loadDataWithParams:(NSDictionary *)params success:(void (^)(CTAPIBaseManager *))successCallback fail:(void (^)(CTAPIBaseManager *))failCallback
 {
     return [[[self alloc] init] loadDataWithParams:params success:successCallback fail:failCallback];
 }
 
-- (NSInteger)loadDataWithParams:(NSDictionary *)params success:(void (^)(CTAPIBaseManager *))successCallback fail:(void (^)(CTAPIBaseManager *))failCallback
+- (NSString *)loadDataWithParams:(NSDictionary *)params success:(void (^)(CTAPIBaseManager *))successCallback fail:(void (^)(CTAPIBaseManager *))failCallback
 {
     self.successBlock = successCallback;
     self.failBlock = failCallback;
@@ -122,9 +135,9 @@ NSString * const kCTAPIBaseManagerRequestID = @"kCTAPIBaseManagerRequestID";
     return [self loadDataWithParams:params];
 }
 
-- (NSInteger)loadDataWithParams:(NSDictionary *)params
+- (NSString *)loadDataWithParams:(NSDictionary *)params
 {
-    NSInteger requestId = 0;
+    NSString *requestId = @"";
     NSDictionary *reformedParams = [self reformParams:params];
     if (reformedParams == nil) {
         reformedParams = @{};
@@ -158,7 +171,7 @@ NSString * const kCTAPIBaseManagerRequestID = @"kCTAPIBaseManagerRequestID";
                 request.service = service;
                 [CTLogger logDebugInfoWithRequest:request apiName:self.child.methodName service:service];
                 
-                NSNumber *requestId = [[CTApiProxy sharedInstance] callApiWithRequest:request success:^(CTURLResponse *response) {
+                NSString *requestId = [[CTApiProxy sharedInstance] callApiWithRequest:request success:^(CTURLResponse *response) {
                     [self successedOnCallingAPI:response];
                 } fail:^(CTURLResponse *response) {
                     CTAPIManagerErrorType errorType = CTAPIManagerErrorTypeDefault;
@@ -173,12 +186,15 @@ NSString * const kCTAPIBaseManagerRequestID = @"kCTAPIBaseManagerRequestID";
                     }
                     [self failedOnCallingAPI:response withErrorType:errorType];
                 }];
+                
+                pthread_rwlock_wrlock(&_requestIdListLock);
                 [self.requestIdList addObject:requestId];
+                pthread_rwlock_unlock(&_requestIdListLock);
                 
                 NSMutableDictionary *params = [reformedParams mutableCopy];
                 params[kCTAPIBaseManagerRequestID] = requestId;
                 [self afterCallingAPIWithParams:params];
-                return [requestId integerValue];
+                return requestId;
             
             } else {
                 [self failedOnCallingAPI:nil withErrorType:CTAPIManagerErrorTypeNoNetWork];
@@ -405,17 +421,21 @@ NSString * const kCTAPIBaseManagerRequestID = @"kCTAPIBaseManagerRequestID";
 }
 
 #pragma mark - private methods
-- (void)removeRequestIdWithRequestID:(NSInteger)requestId
+- (void)removeRequestIdWithRequestID:(NSString *)requestId
 {
-    NSNumber *requestIDToRemove = nil;
-    for (NSNumber *storedRequestId in self.requestIdList) {
-        if ([storedRequestId integerValue] == requestId) {
+    pthread_rwlock_wrlock(&_requestIdListLock);
+
+    NSString *requestIDToRemove = nil;
+    for (NSString *storedRequestId in self.requestIdList) {
+        if ([storedRequestId isEqualToString:requestId]) {
             requestIDToRemove = storedRequestId;
         }
     }
     if (requestIDToRemove) {
         [self.requestIdList removeObject:requestIDToRemove];
     }
+    
+    pthread_rwlock_unlock(&_requestIdListLock);
 }
 
 #pragma mark - getters and setters

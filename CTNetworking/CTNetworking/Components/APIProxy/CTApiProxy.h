@@ -16,8 +16,10 @@ typedef void(^CTCallback)(CTURLResponse *response);
 
 + (instancetype)sharedInstance;
 
-- (NSNumber *)callApiWithRequest:(NSURLRequest *)request success:(CTCallback)success fail:(CTCallback)fail;
-- (void)cancelRequestWithRequestID:(NSNumber *)requestID;
+- (NSString *)callApiWithRequest:(NSURLRequest *)request success:(CTCallback)success fail:(CTCallback)fail;
+- (void)cancelRequestWithRequestID:(NSString *)requestID;
 - (void)cancelRequestWithRequestIDList:(NSArray *)requestIDList;
+
+- (void)cancelAllRequests;
 
 @end

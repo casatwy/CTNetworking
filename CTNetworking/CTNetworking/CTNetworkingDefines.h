@@ -71,7 +71,7 @@ extern NSString * _Nonnull const kCTApiProxyValidateResultKeyResponseString;
 @optional
 - (void)cleanData;
 - (NSDictionary *_Nullable)reformParams:(NSDictionary *_Nullable)params;
-- (NSInteger)loadDataWithParams:(NSDictionary *_Nullable)params;
+- (NSString *_Nonnull)loadDataWithParams:(NSDictionary *_Nullable)params;
 
 @end
 

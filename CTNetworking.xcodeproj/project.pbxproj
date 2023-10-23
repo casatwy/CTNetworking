@@ -239,8 +239,8 @@
 		4A1E17A02045585A00BDBF7B /* BaseAPIManager */ = {
 			isa = PBXGroup;
 			children = (
-				4A1E17A12045585A00BDBF7B /* CTAPIBaseManager.m */,
 				4A1E17A22045585A00BDBF7B /* CTAPIBaseManager.h */,
+				4A1E17A12045585A00BDBF7B /* CTAPIBaseManager.m */,
 			);
 			path = BaseAPIManager;
 			sourceTree = "<group>";
